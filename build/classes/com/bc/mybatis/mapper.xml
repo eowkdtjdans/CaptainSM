@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="petshop">
+	<!-- DB의 DOG테이블의 데이터 수 조회 -->
+	<select id="countDogList" resultType="int">
+		SELECT COUNT(*) FROM DOG
+	</select>
+	
+	<!-- DB의 DOG테이블의 데이터 전체 조회 -->
+	<select id="selectAllDog" resultType="com.end.vo.DogVO" parameterType="Map">
+		SELECT R_NUM, D2.*
+		  FROM (SELECT ROWNUM R_NUM, D.*
+		          FROM (DOG) D
+		          ORDER BY D_IDX DESC
+		        ) D2
+		  WHERE R_NUM BETWEEN #{begin} AND #{end}
+		  ORDER BY D_IDX DESC
+	</select>
+	
+	<!-- DB의 DOG테이블의 D_TYPE 데이터 전체 조회 -->
+	<select id="selectDogType" resultType="com.end.vo.DogVO">
+		SELECT D_TYPE FROM DOG
+	</select>
+	
+	<!-- DB의 DOG테이블의 D_TYPE 데이터 수 조회 -->
+	<select id="cntDogType" resultType="int">
+		SELECT COUNT(*) FROM DOG WHERE D_TYPE = #{d_type}
+	</select>
+	
+	<!-- DB의 DOG테이블에서 D_IDX를 통해 하나의 데이터 조회 -->
+	<select id="selectDogView" resultType="com.end.vo.DogVO">
+		SELECT * FROM DOG WHERE D_IDX = #{d_idx}
+	</select>
+	
+	<!-- DB의 DOG테이블에서 D_TYPE을 통해 데이터 전체조회 -->
+	<select id="selectDogCategory" resultType="com.end.vo.DogVO" parameterType="Map">
+		SELECT R_NUM, D2.*
+		  FROM (SELECT ROWNUM R_NUM, D.*
+		          FROM (DOG) D
+		          WHERE D_TYPE = #{d_type}
+		        ) D2
+		  WHERE R_NUM BETWEEN #{d_begin} AND #{d_end}
+		  AND D_TYPE = #{d_type}
+	</select>
+	
+	<!-- DB의 DOG테이블에 데이터 입력 -->
+	<insert id="dogListWrite" parameterType="com.end.vo.DogVO">
+		INSERT INTO DOG (D_IDX, D_NAME, D_TYPE, D_INTRO, D_AGE, D_FUR, D_SIZE, D_WEIGHT, D_HEIGHT, D_TITLE, D_IMG1, D_IMG2, D_IMG3, C_ID)
+			VALUES (DOG_SEQ.NEXTVAL, #{d_name}, #{d_type}, #{d_intro}, #{d_age}, #{d_fur}, #{d_size}, #{d_weight}, #{d_height}, #{d_title}, #{d_img1}, #{d_img2}, #{d_img3}, #{c_id} )
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- DB의 ORDERS 테이블에서 로그인한 유저의 주문 데이터의 수 조회 -->
+	<select id="countOrderList" resultType="int">
+		SELECT COUNT(*) FROM ORDERS WHERE ID = #{c_id}
+	</select>
+	
+	<!-- DB의 ORDERS 테이블에서 로그인한 유저의 주문 데이터 전체조회 -->
+	<select id="selectOrderList" resultType="com.end.vo.OrderVO">
+		SELECT R_NUM, O2.*
+		  FROM (SELECT ROWNUM R_NUM, O.*
+		          FROM (ORDERS) O
+		          WHERE ID = #{id}
+		        ) O2
+		  WHERE R_NUM BETWEEN #{o_begin} AND #{o_end}
+		  ORDER BY ORDER_DATE DESC
+	</select>
+	
+	<!-- DB의 ORDERS 테이블에서 O_IDX기준으로 데이터 하나조회 -->
+	<select id="selectOrderOne" resultType="com.end.vo.OrderVO" parameterType="String">
+		SELECT * FROM ORDERS WHERE O_IDX = #{o_idx}
+	</select>
+	
+	<!-- DB의 ORDERS_ID 테이블에서 O_IDX기준으로 데이터 하나조회 -->
+	<select id="selectOrderView" resultType="com.end.vo.OrderIdVO" parameterType="String">
+		SELECT * FROM ORDERS_ID WHERE O_IDX = #{o_idx}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="Customerall" resultType="com.end.vo.CustomerVO" >
+		SELECT * FROM CUSTOMER ORDER BY C_IDX
+	</select>
+	
+	<select id="CustomerFindId" resultType="com.end.vo.CustomerVO">
+		SELECT * FROM CUSTOMER WHERE C_NAME = #{c_name}
+	</select>
+	
+	<select id="CustomerFindPwd" resultType="com.end.vo.CustomerVO">
+		SELECT * FROM CUSTOMER WHERE C_ID = #{c_id}
+	</select>
+	
+	<select id="Customerlogin" resultType="com.end.vo.CustomerVO" >
+	SELECT * FROM CUSTOMER WHERE C_ID = #{c_id}
+	</select>
+	
+	<insert id="Customerinsert" parameterType="com.end.vo.CustomerVO">
+		
+		INSERT INTO CUSTOMER
+			(C_IDX, C_ID, C_PWD, C_NAME, C_PHONE, C_ADDR, C_GENDER, C_EMAIL)
+		VALUES (CUSTOMER_SEQ.NEXTVAL, #{c_id}, #{c_pwd}, #{c_name}, 
+			#{c_phone}, #{c_addr}, #{c_gender}, #{c_email}) 
+	</insert>	
+	
+	<select id="findId" resultType="com.end.vo.CustomerVO">
+		SELECT C_ID FROM CUSTOMER WHERE C_NAME = #{c_name} AND C_PHONE = #{c_phone}
+	</select>
+	
+	<select id="Adminsearch" resultType="com.end.vo.CustomerVO" parameterType="Map">
+		SELECT R_NUM, C_IDX, C_ID, C_NAME, C_PHONE, 
+				   C_ADDR, C_GENDER, C_EMAIL			  
+			  FROM (SELECT ROWNUM R_NUM, B.*
+			          FROM (SELECT *
+			                  FROM CUSTOMER 
+			                 ORDER BY C_IDX DESC
+			               ) B 
+			        )
+	</select>
+	
+	<delete id="Admindelete" parameterType="String">
+		DELETE FROM CUSTOMER WHERE C_ID = #{c_id}
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="total" resultType="int" parameterType="String">
+		select count(*) from pet_shop where category = #{category}
+	</select>
+	
+	<select id="data" resultType="com.end.vo.ShopVO"
+			parameterType="Map">
+					
+		SELECT NUM, CATEGORY, P_NAME,P_COMPANY,P_PRICE,P_SALEPRICE,P_IMAGE_S,P_IMAGE_L
+			,P_CONTENT,P_DATE,name
+		FROM (SELECT ROWNUM R_NUM, B.*
+		          FROM (SELECT *
+		                  FROM pet_shop
+		                  where category = #{category}
+		                 ORDER BY NUM DESC
+		               ) B 
+		        )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="one" resultType="com.end.vo.ShopVO" parameterType="String">
+		select * from pet_shop where p_name = #{p_name}
+	</select>
+	
+	<select id="one1" resultType="com.end.vo.ShopCartVO" parameterType="String">
+		select * from cart where p_name = #{p_name}
+	</select>
+	
+	<select id="name" resultType="String" parameterType="String">
+		select name from pet_shop where p_name = #{p_name}
+	</select>
+	
+	<select id="search" resultType="com.end.vo.ShopCartVO" parameterType="String">
+		select cart.*, pet_shop.* from cart, pet_shop
+		where pet_shop.p_name = cart.p_name
+		and c_id = #{c_id}
+	</select>
+	
+	<select id="related" resultType="com.end.vo.ShopVO" parameterType="String">
+		select name, P_IMAGE_S, p_name, p_price, p_saleprice from pet_shop where category =#{category}
+	</select>
+	
+	
+	<select id="fullnameList" resultType="int"
+			parameterType="Map">
+		SELECT count(*)
+		from pet_shop
+		where upper(name) like upper('%' || #{fullname} || '%') or upper(name) like upper('%' || #{fullname} || '%')
+		and category = #{category}
+		order by num desc
+	</select>
+	
+	<select id="data2" resultType="com.end.vo.ShopVO"
+			parameterType="Map">
+		SELECT NUM, CATEGORY, P_NAME,P_COMPANY,P_PRICE,P_SALEPRICE,P_IMAGE_S,P_IMAGE_L
+			,P_CONTENT,P_DATE,name
+		FROM (SELECT ROWNUM R_NUM, B.*
+		          FROM (SELECT *
+		                  FROM pet_shop
+		                  where upper(name) like upper('%' || #{name} || '%') or upper(name) like upper('%' || #{name} || '%')
+		                  and category = #{category}
+		                 ORDER BY NUM DESC
+		               ) B 
+		        )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	 
+
+	<insert id="insert_excart" parameterType="com.end.vo.ShopVO">      
+		insert into orders (c_id,p_name,c_quant) 
+                    
+		values (#{c_id},#{p_name},#{c_quant})
+	</insert>
+	
+	<insert id="insert_item" parameterType="com.end.vo.ShopVO">      
+		insert into orders_id (o_idx,category,p_name,p_company,p_price
+							,p_saleprice,p_image_s,p_image_l,p_content
+							,p_date,num,cart_quant,totalprice) 
+                    
+		values ((select max(o_idx) from orders),#{category},#{p_name},#{p_company},#{p_price}
+							,#{p_saleprice},#{p_image_s},#{p_image_l}
+							,#{p_content},SYSDATE,#{num},#{cart_quant},#{totalprice})
+	</insert>
+	
+	<insert id="insert_item1" parameterType="com.end.vo.ShopVO">      
+		insert into orders_id (o_idx,category,p_name,p_company,p_price
+							,p_saleprice,p_image_s,p_image_l,p_content
+							,p_date,num,totalprice) 
+                    
+		values ((select max(o_idx) from orders),#{category},#{p_name},#{p_company},#{p_price}
+							,#{p_saleprice},#{p_image_s},#{p_image_l}
+							,#{p_content},SYSDATE,#{num},#{totalprice})
+	</insert>
+	
+	
+	<insert id="insert" parameterType="com.end.vo.ShopOrderVO">      
+		insert into orders (id,name,phone,order_date,mail,receiver,site,
+                    phone_receiver,message,deliveryFee,total,                                    
+                    payMeans, o_idx) 
+                    
+		values (#{id},#{name},#{phone},SYSDATE,#{mail},#{receiver},#{site},#{phone_receiver}
+				,#{message},#{deliveryFee},#{total},#{payMeans}, order_seq.nextval)
+	</insert>
+	
+	<insert id="insertO" parameterType="com.end.vo.ShopCartVO">
+		INSERT INTO CART (CART_IDX, C_ID, P_NAME, CART_QUANT)
+			   VALUES    (CART_T_SEQ.NEXTVAL, #{c_id }, #{p_name }, 1)
+	</insert>
+	
+	<update id="updateO" parameterType="com.end.vo.ShopCartVO">
+		UPDATE CART SET CART_QUANT = #{number } 
+    			 WHERE C_ID = #{c_id }
+    			 AND P_NAME = #{p_name } 
+	</update>
+	
+	<update id="updateOO" parameterType="com.end.vo.ShopCartVO">
+		UPDATE CART SET CART_QUANT = #{number }+1
+    			 WHERE C_ID = #{c_id }
+    			 AND P_NAME = #{p_name } 
+	</update>
+	
+	
+	<delete id="deleteO" parameterType="com.end.vo.ShopCartVO">
+		DELETE CART WHERE C_ID = #{c_id }
+    			 	AND P_NAME = #{p_name } 
+	</delete>
+	
+	<delete id="payOk" parameterType="String">
+		DELETE FROM CART WHERE C_ID = #{c_id}
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 게시판 -->
+	<!-- ================================================== -->
+	
+	<select id="reviewAll" resultType="com.end.vo.ReviewDataVO">
+		SELECT R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT FROM REVIEW ORDER BY R_IDX
+	</select>
+
+	<select id="reviewOne" resultType="com.end.vo.ReviewDataVO" parameterType="string">
+		SELECT * FROM REVIEW WHERE R_IDX = #{r_idx }
+	</select>
+
+	<update id="reviewUpdate" parameterType="com.end.vo.ReviewDataVO">
+		UPDATE REVIEW 
+			SET R_TITLE = #{r_title}, R_DATE = SYSDATE, R_CONTENT=#{r_content } 
+			WHERE R_IDX = #{r_idx }
+	</update>
+	
+	<update id="reviewUpdate2" parameterType="com.end.vo.ReviewDataVO">
+		UPDATE REVIEW 
+			SET R_TITLE = #{r_title}, R_DATE = SYSDATE, R_CONTENT=#{r_content }, R_IMAGE_L = #{r_image_l } 
+			WHERE R_IDX = #{r_idx }
+	</update>
+	
+	<delete id="reviewDelete" parameterType="com.end.vo.ReviewDataVO">
+		DELETE REVIEW WHERE R_IDX = #{r_idx }
+	</delete>
+
+	<insert id="reviewInsert" parameterType="com.end.vo.ReviewDataVO">
+		INSERT INTO 
+			REVIEW (R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT, R_IMAGE_L) 
+			VALUES (REVIEW_SEQ.NEXTVAL, #{r_id }, #{r_title }, #{r_phone }, SYSDATE, #{r_content }, 0, #{r_image_l })
+	</insert>
+	
+	<insert id="reviewInsert2" parameterType="com.end.vo.ReviewDataVO">
+		INSERT INTO 
+			REVIEW (R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT) 
+			VALUES (REVIEW_SEQ.NEXTVAL, #{r_id }, #{r_title }, #{r_phone }, SYSDATE, #{r_content }, 0)
+	</insert>
+	
+	<select id="reviewCountAll" resultType="int">
+		SELECT COUNT(R_IDX) FROM REVIEW
+	</select>
+	
+	<select id="reviewRangedList" parameterType="map" resultType="com.end.vo.ReviewDataVO">
+		SELECT R_NUM, R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT
+		  FROM (SELECT ROWNUM R_NUM, R.*
+		          FROM (SELECT *
+		                  FROM REVIEW 
+		                 ORDER BY R_IDX DESC
+		               ) R
+		        )
+		 WHERE R_NUM BETWEEN #{begin } AND #{end }
+		 
+	</select>
+	
+	<update id="reviewCountUp" parameterType="com.end.vo.ReviewDataVO" >
+		UPDATE REVIEW SET R_VIEW_COUNT = R_VIEW_COUNT + 1  WHERE R_IDX = #{r_idx }
+	</update>
+	
+	<!-- 댓글 -->
+	<!-- ================================================== -->
+	
+	<select id="reviewAllC" resultType="com.end.vo.RCommentVO">
+		SELECT * 
+    		FROM R_COMMENT
+    		WHERE R_IDX = #{r_idx }
+    		ORDER BY RC_IDX
+	</select>
+	
+	<select id="reviewOneC" resultType="com.end.vo.RCommentVO">
+		SELECT * FROM R_COMMENT WHERE RC_IDX = #{rc_idx  }
+	</select>
+	
+	<!-- 회원 댓글 -->
+	<update id="reviewUpdateC" parameterType="com.end.vo.RCommentVO">
+		UPDATE R_COMMENT 
+			SET RC_ID= #{rc_id }, RC_NAME = #{rc_name }, RC_DATE = SYSDATE, RC_CONTENT=#{rc_content } 
+			WHERE RC_IDX = #{rc_idx }
+	</update>
+	
+	<!-- 비회원 댓글 -->
+	<update id="reviewUpdateC2" parameterType="com.end.vo.RCommentVO">
+		UPDATE R_COMMENT 
+			SET RC_ID= #{rc_id }, RC_NAME = #{rc_name }, RC_PHONE=#{rc_phone }, RC_DATE = SYSDATE, RC_CONTENT=#{rc_content }, RC_PWD = #{rc_pwd } 
+			WHERE RC_IDX = #{rc_idx }
+	</update>
+	
+	<delete id="reviewDeleteC" parameterType="com.end.vo.RCommentVO">
+		DELETE R_COMMENT WHERE RC_IDX = #{rc_idx }
+	</delete>
+
+	<insert id="reviewInsertC" parameterType="com.end.vo.RCommentVO">
+		INSERT INTO 
+			R_COMMENT (RC_IDX, RC_ID, RC_NAME, RC_DATE, R_IDX, RC_CONTENT) 
+			VALUES    (R_COMMENT_SEQ.NEXTVAL, #{rc_id }, #{rc_name }, SYSDATE, #{r_idx }, #{rc_content })
+	</insert>
+	
+	<!-- 고객정보 -->
+	<!-- ================================================== -->
+	<select id="reviewAllCus" resultType="com.end.vo.CustomerVO">
+		SELECT * FROM CUSTOMER;
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- ===============================문호씨꺼============================= -->
+	<!-- 전체게시글 조회 -->
+	<select parameterType="Map" resultType="com.end.vo.QuestionVO" id="questionList">
+	SELECT R_NUM, Q_IDX, Q_ID, Q_NAME, Q_PHONE,Q_DATE, Q_SUBJECT, Q_CONTENT 
+	FROM (SELECT ROWNUM R_NUM, B.*FROM (SELECT *FROM QUESTION ORDER BY Q_IDX DESC) B)
+	WHERE R_NUM BETWEEN #{begin} AND #{end} 
+	</select>
+	
+	<!-- 전체게시글 수 조회 -->
+	<select resultType="int" id="questionTotalCount">
+	SELECT COUNT(Q_IDX) FROM QUESTION </select>
+	
+	<!-- 글쓰기 insert -->
+	<insert parameterType="com.end.vo.QuestionVO" id="questionInsert">
+	INSERT INTO QUESTION(Q_IDX, Q_ID, Q_SUBJECT, Q_CONTENT, Q_DATE) 
+	VALUES (QUESTION_SEQ.NEXTVAL, #{q_id}, #{q_subject}, #{q_content}, SYSDATE) </insert>
+	
+	<!-- 하나의 게시물 조회onelist -->
+	<select resultType="com.end.vo.QuestionVO" id="questionOne">
+	SELECT * FROM QUESTION WHERE Q_IDX=#{q_idx} </select>
+	
+	<!-- 게시글update -->
+	<update parameterType="com.end.vo.QuestionVO" id="questionUpdate">
+	UPDATE QUESTION SET Q_SUBJECT = #{q_subject}, Q_CONTENT = #{q_content} WHERE Q_IDX = #{q_idx} </update>
+	
+	<!-- 댓글입력 -->
+	<insert parameterType="com.end.vo.QcommentVO" id="questionInsert2">
+	INSERT INTO Q_COMMENT(QC_IDX, QC_ID, Q_IDX, QC_DATE, QC_CONTENT) 
+	VALUES (Q_COMMENT_SEQ.NEXTVAL, #{qc_id},#{q_idx} , SYSDATE, #{qc_content}) </insert>
+	
+	<!-- 댓글조회 -->
+	<select resultType="com.end.vo.QcommentVO" id="questionOne2">
+	SELECT * FROM Q_COMMENT WHERE Q_IDX=#{q_idx} </select>
+	
+	<!-- 댓글수 -->
+	<select parameterType="String" resultType="int" id="questionCommentcount">
+	SELECT COUNT(Q_IDX) FROM Q_COMMENT WHERE Q_IDX=#{q_idx} </select>
+	
+	<select resultType="com.end.vo.QcommentVO" id="questionCommentone">
+	SELECT * FROM Q_COMMENT WHERE QC_IDX=#{qc_idx} </select>
+	
+	<update parameterType="com.end.vo.QcommentVO" id="questionCommentupdate">
+	UPDATE Q_COMMENT SET QC_CONTENT = #{qc_content} WHERE QC_IDX = #{qc_idx} </update>
+	
+	<delete parameterType="String" id="questionCommentdelete">
+	DELETE Q_COMMENT WHERE QC_IDX = #{qc_idx} </delete>
+	
+	<delete parameterType="String" id="questionCommentdeleteall">
+	DELETE Q_COMMENT WHERE Q_IDX= #{q_idx} </delete>
+	
+	<delete parameterType="String" id="questionDelete">
+	DELETE QUESTION WHERE Q_IDX= #{q_idx} </delete>
+	
+
+
+</mapper>
