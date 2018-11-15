@@ -18,51 +18,46 @@ public class ShopListCommand implements PetShopCommand {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		
 		ShopPagingVO vo = new ShopPagingVO();
-		request.setAttribute("nowPage", request.getParameter("nowPage"));
+		request.setAttribute("nowPage", request.getParameter("nowPage"));		
 		
-//		if(request.getParameter("nowPage")==null) {
-//			
-//		}
-		
-		System.out.println("request.getAttribute(\"nowPage\") : " +request.getAttribute("nowPage"));
-		
-		//처음 카테고리에 리스트 조회할때
-		if(request.getSession().getAttribute("category") == null ) {
+		if(request.getParameter("fullname") != null) {
+			System.out.println("제품검색");
+			request.getSession().setAttribute("fullname", request.getParameter("fullname"));
+		} else if((request.getSession().getAttribute("fullname") != null) && (request.getParameter("move") != null )) {
+			System.out.println("제품검색 후에 이동할때");
+			
+		} else if(request.getSession().getAttribute("category") == null ) {
 			System.out.println("처음 카테고리에 리스트 조회할때");
-			System.out.println(request.getSession().getAttribute("category"));
 			request.getSession().setAttribute("category", request.getParameter("category"));
-		//카테고리를 이동했을때
+			
 		} else if(request.getParameter("category") != null) {
-			System.out.println("카테고리를 이동했을때");
-			System.out.println(request.getSession().getAttribute("category"));
+			System.out.println("카테고리를 이동해서 조회할때");
 			request.getSession().setAttribute("category", request.getParameter("category"));
-		//검색을 할때	
-		} else if(request.getParameter("category") == null){
-			System.out.println("검색을 할때	");
-			System.out.println(request.getSession().getAttribute("category"));
+			if(request.getSession().getAttribute("fullname") != null) {
+				request.getSession().removeAttribute("fullname");
+			}
+			
+		} else if(request.getParameter("move") != null) {
+			System.out.println("페이지를 이동했을때");
+			request.getSession().setAttribute("category", request.getParameter("category"));
+			if(request.getSession().getAttribute("fullname") != null) {
+				request.getSession().removeAttribute("fullname");
+			}
 		}
 		
 		
-//		if(request.getSession().getAttribute("category") == null ) {
-//			System.out.println("세션에 없음");
-//			request.getSession().setAttribute("category", request.getParameter("category"));
-//			
-//		} else {
-//			System.out.println("세션에 있음");
-//			System.out.println("request.getParameter(\"category\") : " + request.getParameter("category"));
-//			if(!request.getParameter("category").equals(request.getSession().getAttribute("category"))) {
-//				System.out.println("세션에 있음, 다른 카테고리");
-//				System.out.println("request.getParameter(\"category\") : " + request.getParameter("category"));
-//				System.out.println("request.getSession().getAttribute(\"category\") : " + request.getSession().getAttribute("category"));
-//				request.getSession().setAttribute("category", request.getParameter("category"));
-//				System.out.println("request.getSession().getAttribute(\"category\") : " + request.getSession().getAttribute("category"));
-//				
-//			}
-//		}
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//전체 게시물 수 객체에 저장
 		if( request.getParameter("fullname") != null) {
-			
+			System.out.println("전체 게시물 수 객체에 저장");
 			String fullname = request.getParameter("fullname");
 			
 			Map<String, String> map2 = new HashMap<>(); 
@@ -104,15 +99,14 @@ public class ShopListCommand implements PetShopCommand {
 			vo.setEndPage(vo.getPage());
 		}
 		
-		if(request.getParameter("category") != null) {
+		if((request.getSession().getAttribute("fullname") == null)) {
 		//DB에서 게시글 데이타 가져오기(카테고리로)
+		System.out.println("//DB에서 게시글 데이타 가져오기(카테고리로)");
 		Map<String, String> map = new HashMap<>();
 		
 		map.put("begin", String.valueOf(vo.getBegin()));
 		map.put("end", String.valueOf(vo.getEnd()));
 		map.put("category", request.getParameter("category"));
-		
-		System.out.println("map: " + map);
 		
 		List<ShopVO> list = ShopDAO.getData(map);
 		
@@ -120,16 +114,15 @@ public class ShopListCommand implements PetShopCommand {
 		
 		request.setAttribute("list", list);
 		
-		} else {
-		
 		//DB에서 게시글 데이타 가져오기(카테고리랑 이름으로)
-		if( request.getParameter("fullname") != null) {
+		} else if ( request.getSession().getAttribute("fullname") != null) {
+		System.out.println("request.getParameter(\"fullname\") : " + request.getParameter("fullname"));
 		Map<String, String> map3 = new HashMap<>();
 		
 		map3.put("begin", String.valueOf(vo.getBegin()));
 		map3.put("end", String.valueOf(vo.getEnd()));
 		map3.put("category", (String) request.getSession().getAttribute("category"));
-		map3.put("name",request.getParameter("fullname"));
+		map3.put("name",(String)request.getSession().getAttribute("fullname"));
 		
 		List<ShopVO> list2 = ShopDAO.getData2(map3);
 		
@@ -139,7 +132,7 @@ public class ShopListCommand implements PetShopCommand {
 		
 		request.setAttribute("nowPage", 1);
 		}
-		}
+		
 				
 		return "shopList.jsp";
 	}

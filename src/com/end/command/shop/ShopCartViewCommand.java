@@ -15,14 +15,14 @@ public class ShopCartViewCommand implements PetShopCommand {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		
-		if(request.getSession().getAttribute("아이디") == null) {
+		if(request.getSession().getAttribute("c_id") == null) {
 			request.setAttribute("type", "cart");
 			request.setAttribute("p_name", request.getAttribute("p_name"));
 			return "shopLogin.jsp";
 		}
 		
 		//db에서 로그인한 아이디를 이용해서 카트데이터 뽑아오기
-		List<ShopCartVO> list = ShopDAO.get_all((String)request.getSession().getAttribute("아이디"));
+		List<ShopCartVO> list = ShopDAO.get_all((String)request.getSession().getAttribute("c_id"));
 		
 		HttpSession session = request.getSession();
 		

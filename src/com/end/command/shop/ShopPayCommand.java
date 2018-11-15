@@ -16,7 +16,7 @@ public class ShopPayCommand implements PetShopCommand {
 		
 		request.getSession().setAttribute("p_name", vo);
 		
-		if(request.getSession().getAttribute("아이디") == null) {
+		if(request.getSession().getAttribute("c_id") == null) {
 			request.setAttribute("type", "pay2");
 			request.setAttribute("p_name", request.getAttribute("p_name"));
 			return "shopLogin.jsp";

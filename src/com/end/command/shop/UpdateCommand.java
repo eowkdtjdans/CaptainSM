@@ -32,7 +32,7 @@ public class UpdateCommand implements PetShopCommand {
 				vo.setCart_quant(Integer.parseInt(request.getParameter("su")));
 				
 				ShopCartVO cvo = new ShopCartVO();
-				cvo.setC_id((String)request.getSession().getAttribute("아이디"));
+				cvo.setC_id((String)request.getSession().getAttribute("c_id"));
 				cvo.setP_name(p_name);
 				cvo.setNumber(vo.getCart_quant());
 				

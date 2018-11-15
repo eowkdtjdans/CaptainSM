@@ -114,23 +114,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<meta name="viewport" content="width=device-width", initial-scale=1 >
-	<link rel="stylesheet" href="css/bootstrap.css">
+
+ <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+        <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/shop-item.css" rel="stylesheet">
+
 <style>
-	/* #bbs table {
-		width: 580px;
-		margin-left: 10px;
-		border: 1px solid black;
-		border-collapse: collapse;
-		font-size: 14px;
+	#bg1 {
+		background-color: #ece6cc;
 	}
-	#bbs table caption {
-		font-size: 20px;
+	#dogimg{
+		width: 300px;
+		height: 200px;
+	}
+	#attach1{
+		display: inline-block;
+		width: 300px;
+		height: 150px;
+		margin: 1em;
+		margin-top: -30px;
+	}
+	#attach2{
+		display: inline-block;
+		width: 400px;
+		height: 250px;
+		margin: 1em;
+		margin-top: -30px;
+	}
+	#bold{
 		font-weight: bold;
-		margin-bottom: 10px;
-	} */
+	}
+	#subject{
+		display: inline;
+		font-size: 30px;
+	}
+	#icon1{
+		width: 60px;
+	}
+	#nav{
+		background-color: #8f784b;
+	}
+	#abc a{
+		color: white;
+	}
+	#paw{
+		width: 30px;
+	}
+	.list-group-item{
+		color:#8f784b;
+		font-weight: bold;
+	}
+	#fontweight{
+		font-size: 2rem;
+	}
+	.no{ width: 10%}		
+	.subject{ width: 50%}		
+	.id{ width: 15%}		
+	.date{ width: 15%}		
+	.count_num{ width: 10%}	
+
+	/******* 페이지 표시 부분 스타일(시작) *****/
+	.paging { list-style: none; }
+	.paging li {
+		float: left;
+		margin-right: 30px;
+	}
+	.paging li a {
+		text-decoration: none;
+		 display: block;
+		padding: 3px 3px; 
+		color: black;
+	}
+
+	.paging .disable {
+		padding: 3px 3px;
+		color: silver;
+	}
+	.paging .now {
+		padding: 3px 3px;
+		font-weight: bold;
+	} 
+	
 </style>
 <script>
 	function write_go() {
@@ -139,6 +210,7 @@
 		
 		if (c_id == "") {
 			alert("로그인해주세요");
+			history.back(-2);
 			//return 로그인 or 회원가입 jsp or command 파일 삽입해주세요
 			//jsp or command에서 DB의 Customer정보를 CustomerVO의 세션입력
 		} else {
@@ -151,22 +223,75 @@
 </script>
 </head>
 <body>
-<div id="bbs" class="container">
 
-	<h2>자료 목록</h2>
-	<!-- <p>[<a href="write.jsp">글쓰기</a>]</p> -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="nav">
+      <div class="container">
+        <a class="navbar-brand" href="Home.jsp"><img src="/CaptainSM/img/paw.PNG" id="paw">&nbsp;Happy Dog</a> <!--PSC?type=CustomerMain과 같습니다.  -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" id="abc">
+              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
+            </li>
+            <li class="nav-item" id="abc">
+              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
+            </li>
+            <li class="nav-item" id="abc">
+              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a> <!-- 일단은 확인용으로 추가해놨어요 요거는 세션을지우는거라서 MVC패턴으로 안해놔서 바로연결-->
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+		
+        <div class="col-lg-3">
+          <h1 class="my-4"><img src="img/paw.PNG" id="paw">&nbsp;Happy dog</h1>
+          <div class="list-group">
+            <a href="PSC?type=dogList&cPage=1" class="list-group-item">분양</a>
+            <a href="PSC?type=questionList" class="list-group-item">문의 게시판</a>
+            <a href="PSC?type=reviewAll" class="list-group-item">후기 게시판</a>
+            <a href="PSC?type=menu" class="list-group-item">애견용품</a>
+            <a href="#" class="list-group-item">애견 선택 요령</a>
+          </div>
+        </div>
+
+        <div class="col-lg-9">
+          <div class="card mt-4">
+            <img class="card-img-top img-fluid" src="img/dogwallpaper5.jpg">
+            <div class="card-body">
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+          <!-- /.card -->
+
+<div class="container">
+
 	<p><input type="button" value="글쓰기" onclick="write_go()" class="btn btn-default"></p>
 	<hr>
 	<form method="post" enctype="multipart/form-data">
-	<table border="1" class="table table-hover">
+	<table class="table table-hover">
+	<!-- <h3 class="page-header">후기 게시판</h3> -->
 		<thead>
-			<tr>
-				<th>번호</th>	
-				<th>제목</th>
-				<th>아이디</th>
-				<th>작성일자</th>
-				<th>조회수</th>
-				
+			<tr class="title">
+				<th class="no">번호</th>	
+				<th class="subject">제목</th>
+				<th class="id">아이디</th>
+				<th class="date">작성일자</th>
+				<th class="count_num">조회수</th>
 			</tr>
 		</thead>
 		
@@ -192,14 +317,16 @@
 		
 		<tfoot>
 			<tr>
-				<td>
-					<ul class="pagination">
+				<td colspan="5">
+					
+					<ul class="paging">
+					
 					<c:forEach var="b" begin="${pvo.getNowBlock() }" end="${pvo.getNowBlock() + 1 }">
 						<c:choose>
 								<c:when test="${b == pvo.getNowBlock() }">
 									<c:choose>
 										<c:when test="${pvo.getNowBlock() == 1  }" >
-											<li><a>이전<a></li>
+											<li class="disable">이전</li>
 										
 										</c:when>
 										<c:otherwise>
@@ -211,33 +338,15 @@
 									</c:choose>
 								</c:when>
 								
-								<c:otherwise>
-									<c:choose>
-									
-									<c:when test="${pvo.getNowBlock() == pvo.getTotalBlock() }">
-										<li>
-											<a>다음<a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<li>
-											<a href="PSC?type=reviewAll&cPage=${pvo.getlPageNumAtBlock() + 1 }&plus=${pvo.getNowBlock()  }">다음</a>
-										</li>
-									</c:otherwise>
-									
-									</c:choose>
-								</c:otherwise>
-								
 						</c:choose>
 					</c:forEach>
 					
-				
 					<c:forEach var="k" begin="${pvo.getfPageNumAtBlock() }" end="${pvo.getlPageNumAtBlock() }">
 						<c:choose>
 						
 							<c:when test="${k == pvo.nowPage }">
-								<li >
-									<a>${k }<a>
+								<li class="now">
+									${k }
 								</li>
 							</c:when>
 						
@@ -249,7 +358,32 @@
 							
 						</c:choose>
 					</c:forEach>
+					
+					<c:forEach var="a" begin="${pvo.getNowBlock() }" end="${pvo.getNowBlock() + 1 }">
+						<c:choose>
+							
+							<c:when test="${a == pvo.getNowBlock() }">
+									<c:choose>
+									
+									<c:when test="${pvo.getNowBlock() == pvo.getTotalBlock() }">
+										<li class="disable" float:right;>
+											다음
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li float:right;>
+											<a href="PSC?type=reviewAll&cPage=${pvo.getlPageNumAtBlock() + 1 }&plus=${pvo.getNowBlock()  }">다음</a>
+										</li>
+									</c:otherwise>
+									
+									</c:choose>
+							</c:when>
+							
+						</c:choose>
+					</c:forEach>
+					
 					</ul>
+					
 				</td>
 			</tr>
 		</tfoot>
@@ -258,5 +392,10 @@
 	</form>
 
 </div>
+
+
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js">

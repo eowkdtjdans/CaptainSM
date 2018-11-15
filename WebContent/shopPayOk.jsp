@@ -9,6 +9,6 @@
 <body>
 
 	결제완료
-
+	<%@include file="include/footer.jsp"%>
 </body>
 </html>

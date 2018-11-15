@@ -298,108 +298,99 @@
 	
 	
 	
-	<!-- 게시판 -->
-	<!-- ================================================== -->
-	
 	<select id="reviewAll" resultType="com.end.vo.ReviewDataVO">
-		SELECT R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT FROM REVIEW ORDER BY R_IDX
-	</select>
+      SELECT R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT FROM REVIEW ORDER BY R_IDX
+   </select>
 
-	<select id="reviewOne" resultType="com.end.vo.ReviewDataVO" parameterType="string">
-		SELECT * FROM REVIEW WHERE R_IDX = #{r_idx }
-	</select>
+   <select id="reviewOne" resultType="com.end.vo.ReviewDataVO" parameterType="string">
+      SELECT * FROM REVIEW WHERE R_IDX = #{r_idx }
+   </select>
 
-	<update id="reviewUpdate" parameterType="com.end.vo.ReviewDataVO">
-		UPDATE REVIEW 
-			SET R_TITLE = #{r_title}, R_DATE = SYSDATE, R_CONTENT=#{r_content } 
-			WHERE R_IDX = #{r_idx }
-	</update>
-	
-	<update id="reviewUpdate2" parameterType="com.end.vo.ReviewDataVO">
-		UPDATE REVIEW 
-			SET R_TITLE = #{r_title}, R_DATE = SYSDATE, R_CONTENT=#{r_content }, R_IMAGE_L = #{r_image_l } 
-			WHERE R_IDX = #{r_idx }
-	</update>
-	
-	<delete id="reviewDelete" parameterType="com.end.vo.ReviewDataVO">
-		DELETE REVIEW WHERE R_IDX = #{r_idx }
-	</delete>
+   <update id="reviewUpdate" parameterType="com.end.vo.ReviewDataVO">
+      UPDATE REVIEW 
+         SET R_TITLE = #{r_title}, R_DATE = SYSDATE, R_CONTENT=#{r_content } 
+         WHERE R_IDX = #{r_idx }
+   </update>
+   
+   <update id="reviewUpdate2" parameterType="com.end.vo.ReviewDataVO">
+      UPDATE REVIEW 
+         SET R_TITLE = #{r_title}, R_DATE = SYSDATE, R_CONTENT=#{r_content }, R_IMAGE_L = #{r_image_l } 
+         WHERE R_IDX = #{r_idx }
+   </update>
+   
+   <delete id="reviewDelete" parameterType="com.end.vo.ReviewDataVO">
+      DELETE REVIEW WHERE R_IDX = #{r_idx }
+   </delete>
 
-	<insert id="reviewInsert" parameterType="com.end.vo.ReviewDataVO">
-		INSERT INTO 
-			REVIEW (R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT, R_IMAGE_L) 
-			VALUES (REVIEW_SEQ.NEXTVAL, #{r_id }, #{r_title }, #{r_phone }, SYSDATE, #{r_content }, 0, #{r_image_l })
-	</insert>
-	
-	<insert id="reviewInsert2" parameterType="com.end.vo.ReviewDataVO">
-		INSERT INTO 
-			REVIEW (R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT) 
-			VALUES (REVIEW_SEQ.NEXTVAL, #{r_id }, #{r_title }, #{r_phone }, SYSDATE, #{r_content }, 0)
-	</insert>
-	
-	<select id="reviewCountAll" resultType="int">
-		SELECT COUNT(R_IDX) FROM REVIEW
-	</select>
-	
-	<select id="reviewRangedList" parameterType="map" resultType="com.end.vo.ReviewDataVO">
-		SELECT R_NUM, R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT
-		  FROM (SELECT ROWNUM R_NUM, R.*
-		          FROM (SELECT *
-		                  FROM REVIEW 
-		                 ORDER BY R_IDX DESC
-		               ) R
-		        )
-		 WHERE R_NUM BETWEEN #{begin } AND #{end }
-		 
-	</select>
-	
-	<update id="reviewCountUp" parameterType="com.end.vo.ReviewDataVO" >
-		UPDATE REVIEW SET R_VIEW_COUNT = R_VIEW_COUNT + 1  WHERE R_IDX = #{r_idx }
-	</update>
-	
-	<!-- 댓글 -->
-	<!-- ================================================== -->
-	
-	<select id="reviewAllC" resultType="com.end.vo.RCommentVO">
-		SELECT * 
-    		FROM R_COMMENT
-    		WHERE R_IDX = #{r_idx }
-    		ORDER BY RC_IDX
-	</select>
-	
-	<select id="reviewOneC" resultType="com.end.vo.RCommentVO">
-		SELECT * FROM R_COMMENT WHERE RC_IDX = #{rc_idx  }
-	</select>
-	
-	<!-- 회원 댓글 -->
-	<update id="reviewUpdateC" parameterType="com.end.vo.RCommentVO">
-		UPDATE R_COMMENT 
-			SET RC_ID= #{rc_id }, RC_NAME = #{rc_name }, RC_DATE = SYSDATE, RC_CONTENT=#{rc_content } 
-			WHERE RC_IDX = #{rc_idx }
-	</update>
-	
-	<!-- 비회원 댓글 -->
-	<update id="reviewUpdateC2" parameterType="com.end.vo.RCommentVO">
-		UPDATE R_COMMENT 
-			SET RC_ID= #{rc_id }, RC_NAME = #{rc_name }, RC_PHONE=#{rc_phone }, RC_DATE = SYSDATE, RC_CONTENT=#{rc_content }, RC_PWD = #{rc_pwd } 
-			WHERE RC_IDX = #{rc_idx }
-	</update>
-	
-	<delete id="reviewDeleteC" parameterType="com.end.vo.RCommentVO">
-		DELETE R_COMMENT WHERE RC_IDX = #{rc_idx }
-	</delete>
+   <insert id="reviewInsert" parameterType="com.end.vo.ReviewDataVO">INSERT INTO 
+         REVIEW (R_IDX, R_ID, R_TITLE, R_DATE, R_CONTENT, R_VIEW_COUNT, R_IMAGE_L) 
+         VALUES (REVIEW_SEQ.NEXTVAL, #{r_id }, #{r_title }, SYSDATE, #{r_content }, 0, #{r_image_l })</insert>
+   
+   <insert id="reviewInsert2" parameterType="com.end.vo.ReviewDataVO">INSERT INTO 
+         REVIEW (R_IDX, R_ID, R_TITLE, R_DATE, R_CONTENT, R_VIEW_COUNT) 
+         VALUES (REVIEW_SEQ.NEXTVAL, #{r_id }, #{r_title }, SYSDATE, #{r_content }, 0)</insert>
+   
+   <select id="reviewCountAll" resultType="int">
+      SELECT COUNT(R_IDX) FROM REVIEW
+   </select>
+   
+   <select id="reviewRangedList" parameterType="map" resultType="com.end.vo.ReviewDataVO">
+      SELECT R_NUM, R_IDX, R_ID, R_TITLE, R_PHONE, R_DATE, R_CONTENT, R_VIEW_COUNT
+        FROM (SELECT ROWNUM R_NUM, R.*
+                FROM (SELECT *
+                        FROM REVIEW 
+                       ORDER BY R_IDX DESC
+                     ) R
+              )
+       WHERE R_NUM BETWEEN #{begin } AND #{end }
+       
+   </select>
+   
+   <update id="reviewCountUp" parameterType="com.end.vo.ReviewDataVO" >
+      UPDATE REVIEW SET R_VIEW_COUNT = R_VIEW_COUNT + 1  WHERE R_IDX = #{r_idx }
+   </update>
+   
+   <!-- 댓글 -->
+   <!-- ================================================== -->
+   
+   <select id="reviewAllC" resultType="com.end.vo.RCommentVO">
+      SELECT * 
+          FROM R_COMMENT
+          WHERE R_IDX = #{r_idx }
+          ORDER BY RC_IDX
+   </select>
+   
+   <select id="reviewOneC" resultType="com.end.vo.RCommentVO">
+      SELECT * FROM R_COMMENT WHERE RC_IDX = #{rc_idx  }
+   </select>
+   
+   <!-- 회원 댓글 -->
+   <update id="reviewUpdateC" parameterType="com.end.vo.RCommentVO">
+      UPDATE R_COMMENT 
+         SET RC_ID= #{rc_id }, RC_NAME = #{rc_name }, RC_DATE = SYSDATE, RC_CONTENT=#{rc_content } 
+         WHERE RC_IDX = #{rc_idx }
+   </update>
+   
+   <!-- 비회원 댓글 -->
+   <update id="reviewUpdateC2" parameterType="com.end.vo.RCommentVO">
+      UPDATE R_COMMENT 
+         SET RC_ID= #{rc_id }, RC_NAME = #{rc_name }, RC_PHONE=#{rc_phone }, RC_DATE = SYSDATE, RC_CONTENT=#{rc_content }, RC_PWD = #{rc_pwd } 
+         WHERE RC_IDX = #{rc_idx }
+   </update>
+   
+   <delete id="reviewDeleteC" parameterType="com.end.vo.RCommentVO">
+      DELETE R_COMMENT WHERE RC_IDX = #{rc_idx }
+   </delete>
 
-	<insert id="reviewInsertC" parameterType="com.end.vo.RCommentVO">
-		INSERT INTO 
-			R_COMMENT (RC_IDX, RC_ID, RC_NAME, RC_DATE, R_IDX, RC_CONTENT) 
-			VALUES    (R_COMMENT_SEQ.NEXTVAL, #{rc_id }, #{rc_name }, SYSDATE, #{r_idx }, #{rc_content })
-	</insert>
-	
-	<!-- 고객정보 -->
-	<!-- ================================================== -->
-	<select id="reviewAllCus" resultType="com.end.vo.CustomerVO">
-		SELECT * FROM CUSTOMER;
-	</select>
+   <insert id="reviewInsertC" parameterType="com.end.vo.RCommentVO">INSERT INTO 
+         R_COMMENT (RC_IDX, RC_ID, RC_DATE, R_IDX, RC_CONTENT) 
+         VALUES    (R_COMMENT_SEQ.NEXTVAL, #{rc_id }, SYSDATE, #{r_idx }, #{rc_content })</insert>
+   
+   <!-- 고객정보 -->
+   <!-- ================================================== -->
+   <select id="reviewAllCus" resultType="com.end.vo.CustomerVO">
+      SELECT * FROM CUSTOMER;
+   </select>
 	
 	
 	

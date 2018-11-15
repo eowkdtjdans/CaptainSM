@@ -6,11 +6,72 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
 	<!-- Bootstrap core CSS -->
-    <link href="startbootstrap-shop-homepage-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="startbootstrap-shop-homepage-gh-pages/css/portfolio-item.css" rel="stylesheet">
+    <link href="css/portfolio-item.css" rel="stylesheet">
+    
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shop-item.css" rel="stylesheet">
+    
+<style>
+	
+	#bg1 {
+		background-color: #ece6cc;
+	}
+	#dogimg{
+		width: 300px;
+		height: 200px;
+	}
+	#attach1{
+		display: inline-block;
+		width: 300px;
+		height: 150px;
+		margin: 1em;
+		margin-top: -30px;
+	}
+	#attach2{
+		display: inline-block;
+		width: 400px;
+		height: 250px;
+		margin: 1em;
+		margin-top: -30px;
+	}
+	#bold{
+		font-weight: bold;
+	}
+	#subject{
+		display: inline;
+		font-size: 30px;
+	}
+	#icon1{
+		width: 60px;
+	}
+	#nav{
+		background-color: #8f784b;
+	}
+	#abc a{
+		color: white;
+	}
+	#paw{
+		width: 30px;
+		height: 30px;
+	}
+	.list-group-item{
+		color:#8f784b;
+		font-weight: bold;
+	}
+	#fontweight{
+		font-size: 2rem;
+	}	
+</style>
+
 <script>
 function goBack() {
 	window.history.go(-2);
@@ -25,6 +86,30 @@ function update(frm) {
 
 
 <body>	
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="nav">
+      <div class="container">
+        <a class="navbar-brand" href="Home.jsp"><img src="/CaptainSM/img/paw.PNG" id="paw">&nbsp;Happy Dog</a> <!--PSC?type=CustomerMain과 같습니다.  -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" id="abc">
+              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
+            </li>
+            <li class="nav-item" id="abc">
+              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
+            </li>
+            <li class="nav-item" id="abc">
+              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a> <!-- 일단은 확인용으로 추가해놨어요 요거는 세션을지우는거라서 MVC패턴으로 안해놔서 바로연결-->
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+ <br><br><br><br><br>
 	<div class="container">	
 		<div class="row">
 		<table class="table" style="text-align: center; border: 1px solid #dddddd">	
@@ -62,7 +147,9 @@ function update(frm) {
 							method="post">
 					<input type="number" name="su"
 						value="${vo.getCart_quant()}" size="2">
+					
 					<button type="button" class="btn btn-danger btn-sm" onclick="update(this.form)">수정</button>
+						
 				</form>
 			</td>
 				<c:if test="${vo.getP_saleprice() == 0}">
@@ -120,9 +207,10 @@ function update(frm) {
 	</tfoot>
 	</table>
 	<!-- Bootstrap core JavaScript -->
-    <script src="startbootstrap-shop-homepage-gh-pages/vendor/jquery/jquery.min.js"></script>
-    <script src="startbootstrap-shop-homepage-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     </div>
     </div>
+    <%@include file="include/footer.jsp"%>
 </body>
 </html>

@@ -45,8 +45,9 @@ public class ReviewWriteCommand implements PetShopCommand {
 			r_phone = mr.getParameter("r_phone");
 			r_content = mr.getParameter("r_content");
 			
+			System.out.println("r_image_l : " + r_image_l );
+			
 			if (chk == null) {
-				
 				
 			} else {
 				
@@ -56,12 +57,12 @@ public class ReviewWriteCommand implements PetShopCommand {
 				vo.setR_title(r_title);
 				vo.setR_phone(r_phone);
 				vo.setR_content(r_content);
-				vo.setR_image_l(r_image_l);
 				
-				if (r_image_l != "") {
+				if (r_image_l != null) {
+					vo.setR_image_l(r_image_l);
 					ReviewDAO.insert(vo);
 					
-				} else {
+				} else if (r_image_l == null) {
 					ReviewDAO.insert2(vo);
 					
 				}

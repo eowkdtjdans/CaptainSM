@@ -49,7 +49,7 @@
         <div class="col-md-4">
           <h3 class="my-3">${name }</h3>
           <p>${vo.getP_content() }</p>
-          <h3 class="my-3">Project Details</h3>
+          <h3 class="my-3">제품 세부사항</h3>
           <ul>
           
        	 	<c:if test="${vo.getP_saleprice() != 0}">
@@ -131,5 +131,6 @@
     <script src="startbootstrap-portfolio-item-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="startbootstrap-portfolio-item-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	</div>
+	<%@include file="include/footer.jsp"%>
 </body>
 </html>

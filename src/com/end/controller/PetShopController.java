@@ -45,6 +45,7 @@ import com.end.command.review.ReviewAllCommand;
 import com.end.command.review.ReviewDeleteCommand;
 import com.end.command.review.ReviewDeleteCommnadC;
 import com.end.command.review.ReviewOneListCommand;
+import com.end.command.review.ReviewUpdateCommand;
 import com.end.command.review.ReviewUpdateCommnadC;
 import com.end.command.review.ReviewWriteCommand;
 import com.end.command.review.ReviewWriteCommnadC;
@@ -175,7 +176,7 @@ public class PetShopController extends HttpServlet {
 		} else if (type.equals("reviewWrite")) {
 			comm = new ReviewWriteCommand();
 		} else if (type.equals("reviewUpdate")) {
-			comm = new UpdateCommand();
+			comm = new ReviewUpdateCommand();
 		} else if (type.equals("reviewDelete")) {
 			comm = new ReviewDeleteCommand();
 		} else if (type.equals("reviewWriteC")) {

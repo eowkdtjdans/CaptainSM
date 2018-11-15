@@ -15,21 +15,21 @@
 
 <script>
 	function login_chk(frm){
-	
-		if (frm.qc_content.value== " "){
-			
-			alert("댓글을 입력해주세요");
-			frm.qc_content.focus();
-			return false;
-		} else {
-			frm.action = "PSC?type=questionComment";
-			frm.submit();
-			
+		if("${c_id}" == "") {
+			alert("로그인이 필요한 서비스입니다.");
+			location.href="PSC?type=CustomerLogin";
+		} else{
+			if (frm.qc_content.value== " "){
+				
+				alert("댓글을 입력해주세요");
+				frm.qc_content.focus();
+				return false;
+			} else {
+				frm.action = "PSC?type=questionComment&q_idx=${vo.q_idx}";
+				frm.submit();
+				
+			}
 		}
-		
-			
-						
-		
 		
 	}
 	
@@ -59,7 +59,7 @@
 			if("${vo.q_id}" == "${c_id}"){
 				if(confirm("정말 수정하시겠습니까?")){
 					//yes
-					location.href="PSC?type=questionModify&q_idx=${vo.q_idx }";
+					location.href="PSC?type=questionModify&q_idx=${vo.q_idx}";
 				}else{
 					//no
 					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
@@ -75,12 +75,12 @@
 		}
 	}
 	
-	function modifyokC(qcvo) {
+	function modifyokC(qc_id, qc_idx) {
 		if("${c_id}" != ""){
-			if(qcvo.qc_id == "${c_id}"){
+			if(qc_id == "${c_id}"){
 				if(confirm("정말 수정하시겠습니까?")){
 					//yes
-					location.href="PSC?type=questionModifyComment&qc_idx=" + qcvo.qc_idx + "&q_idx=${vo.q_idx}";
+					location.href="PSC?type=questionModifyComment&qc_idx=" + qc_idx + "&q_idx=${vo.q_idx}";
 				}else{
 					//no
 					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
@@ -95,12 +95,12 @@
 		}
 	}
 	
-	function deleteokC(qcvo) {
+	function deleteokC(qc_id, qc_idx) {
 		if("${c_id}" != ""){
-			if(qcvo.qc_id == "${c_id}"){
+			if(qc_id == "${c_id}"){
 				if(confirm("정말 삭제하시겠습니까?")){
 					//yes
-					location.href="PSC?type=questionDeleteComment&qc_idx=" + qcvo.qc_idx + "&q_idx=${vo.q_idx}";
+					location.href="PSC?type=questionDeleteComment&qc_idx=" + qc_idx + "&q_idx=${vo.q_idx}";
 				}else{
 					//no
 					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
@@ -188,8 +188,8 @@ textarea{
 					<div class="text-right">
 					<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
 					${vo.qc_date }&nbsp;&nbsp;	
-					<a href="#" onclick="modifyokC('${vo}')">| 수정</a> |
-					<a href="#" onclick="deleteokC('${vo}')">| 삭제</a> |
+					<a href="#" onclick="modifyokC('${vo.qc_id}','${vo.qc_idx}')">| 수정</a> |
+					<a href="#" onclick="deleteokC('${vo.qc_id}','${vo.qc_idx}')">| 삭제</a> |
 					</div>
 				</div>									
 				<div>${vo.qc_content }</div>

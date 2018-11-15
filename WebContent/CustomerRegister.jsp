@@ -24,41 +24,42 @@
 		
 
 		//입력한 값이 없다면 다시 작성
-		if(frm.c_id.value == "") {
+		if(frm.c_id.value == " ") {
 			alert("아이디를 입력 안했습니다.");
 			frm.c_id.focus();
+			frm.c_id.value = "";
 			return false;
-		} 
-		if (frm.c_pwd.value == "") {
+		} else if (frm.c_pwd.value == " ") {
 			alert("비밀번호를 입력 안했습니다.");
 			frm.c_pwd.focus();
+			frm.c_pwd.value = "";
 			return false;
-		}
-		if (frm.c_addr.value == "") {
+		} else if (frm.c_addr.value == " ") {
 			alert("주소를 입력 안했습니다.");
 			frm.c_addr.focus();
+			frm.c_addr.value = "";
 			return false;
-		}
-		if (frm.c_name.value == "") {
+		} else if (frm.c_name.value == " ") {
 			alert("이름을 입력 안했습니다.");
 			frm.c_name.focus();
+			frm.c_name.value = "";
 			return false;
-		}
-		if (frm.c_phone.value == "") {
+		} else if (frm.c_phone.value == " ") {
 			alert("핸드폰 번호를 입력 안했습니다.");
 			frm.c_phone.focus();
+			frm.c_phone.value = "";
 			return false;
-		}
-		if (frm.c_gender.value == "") {
+		} else if (frm.c_gender.value == " ") {
 			alert("성별을 제대로 체크 하세요.");
 			frm.c_gender.focus();
+			frm.c_gender.value = "";
 			return false;
-		}
-		if (frm.c_email.value == "") {
+		} else if (frm.c_email.value == " ") {
 			alert("이메일을 입력 안했습니다.");
 			frm.c_email.focus();
+			frm.c_email.value = "";
 			return false;
-		} 
+		}
 		
 		frm.action = "PSC?type=CustomerRegister";
 		frm.submit();
@@ -82,15 +83,15 @@
 				 if (frm.c_id.value != "") {
 					for (i = 0; i < frm.c_id.value.length; i++) {
 			            ch = frm.c_id.value.charAt(i)
-			            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')&&!(ch >= 'A' && ch <= 'Z')) {
-			                alert("아이디는 대소문자, 숫자만 입력가능합니다.");
+			            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')) {
+			                alert("아이디는 영어 소문자, 숫자만 입력가능합니다.");
 			                frm.c_id.focus();
 			                frm.c_id.value="";
 			                return false;
-			            }
+			            } 
 			        }
-			    } if (frm.c_id.value.length>=12) {
-					 alert("아이디를 12자이하까지 입력해주세요.");
+			    } if (frm.c_id.value.length>=20) {
+					 alert("아이디를 20자이하까지 입력 가능합니다.");
 						 frm.c_id.focus();
 		                frm.c_id.value="";
 			            return false;
@@ -116,7 +117,7 @@
 	 function checkPassword(frm) {
 		 var pwd = frm.c_pwd.value;
 		 var pwd2 = frm.c_pwd2.value;
-		  if (pwd == " ") {
+		  if (pwd == " " || pwd2 == " ") {
 			  alert("비밀번호에 공백을 넣을 수 없습니다.");
 			  frm.c_pwd.value="";
 			  frm.c_pwd2.value="";
@@ -193,8 +194,8 @@
 					if (frm.c_email.value != "") {
 						for (i = 0; i < frm.c_email.value.length; i++) {
 				            ch = frm.c_email.value.charAt(i)
-				            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')&&!(ch >= 'A' && ch <= 'Z')) {
-				                alert("이메일은 대소문자, 숫자만 입력가능합니다.");
+				            if (!(ch >= '0' && ch <= '9') && !(ch >= 'a' && ch <= 'z')) {
+				                alert("이메일은 영어 소문자, 숫자만 입력가능합니다.");
 				                frm.c_email.focus();
 				                frm.c_email.value="";
 				                return false;
@@ -289,7 +290,7 @@
 		
 	<tr>
 		<td style="width: 110px;">이름</td>
-		<td colspan="2"><input type="text" class="form-control" id="c_name" name="c_name" maxLength="20"/>
+		<td colspan="2"><input type="text" class="form-control" id="c_name" name="c_name" maxLength="20" oninput="name_chk(this.form)"/>
 		</td>
 	</tr>
 	
@@ -323,9 +324,10 @@
 		<td colspan="2"><input type="email" class="form-control" id="c_email" name="c_email" maxLength="20" 
 		style="width :100%;"oninput="email_checkFunction(this.form)"/>
 			<select name="emails" class="form-control" id="emails" style="width :50%;">
-            	<option value="@naver.com">@naver.com</option>
             	<option value="@gmail.com">@gmail.com</option>
+            	<option value="@nate.com">@nate.com</option>
             	<option value="@daum.net" selected>@daum.net</option>
+            	<option value="@naver.com">@naver.com</option>
          	</select>
 		</td>
 	</tr>

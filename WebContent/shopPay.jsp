@@ -79,5 +79,6 @@
 		</tfoot>
 		</table>
 	</form>
+	<%@include file="include/footer.jsp"%>
 </body>
 </html>
