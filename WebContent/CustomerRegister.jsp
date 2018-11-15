@@ -41,9 +41,10 @@
 		}
 		if (frm.c_name.value == "") {
 			alert("이름을 입력 안했습니다.");
+			
 			frm.c_name.focus();
 			return false;
-		}
+		} 
 		if (frm.c_phone.value == "") {
 			alert("핸드폰 번호를 입력 안했습니다.");
 			frm.c_phone.focus();
@@ -58,7 +59,7 @@
 			alert("이메일을 입력 안했습니다.");
 			frm.c_email.focus();
 			return false;
-		} 
+		}
 		
 		frm.action = "PSC?type=CustomerRegister";
 		frm.submit();
@@ -87,10 +88,10 @@
 			                frm.c_id.focus();
 			                frm.c_id.value="";
 			                return false;
-			            }
+			            } 
 			        }
-			    } if (frm.c_id.value.length>=12) {
-					 alert("아이디를 12자이하까지 입력해주세요.");
+			    } if (frm.c_id.value.length>=20) {
+					 alert("아이디를 20자이하까지 입력 가능합니다.");
 						 frm.c_id.focus();
 		                frm.c_id.value="";
 			            return false;
@@ -289,7 +290,7 @@
 		
 	<tr>
 		<td style="width: 110px;">이름</td>
-		<td colspan="2"><input type="text" class="form-control" id="c_name" name="c_name" maxLength="20"/>
+		<td colspan="2"><input type="text" class="form-control" id="c_name" name="c_name" maxLength="20" oninput="name_chk(this.form)"/>
 		</td>
 	</tr>
 	
@@ -323,9 +324,10 @@
 		<td colspan="2"><input type="email" class="form-control" id="c_email" name="c_email" maxLength="20" 
 		style="width :100%;"oninput="email_checkFunction(this.form)"/>
 			<select name="emails" class="form-control" id="emails" style="width :50%;">
-            	<option value="@naver.com">@naver.com</option>
             	<option value="@gmail.com">@gmail.com</option>
+            	<option value="@nate.com">@nate.com</option>
             	<option value="@daum.net" selected>@daum.net</option>
+            	<option value="@naver.com">@naver.com</option>
          	</select>
 		</td>
 	</tr>
