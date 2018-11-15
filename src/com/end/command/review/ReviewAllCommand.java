@@ -21,12 +21,12 @@ public class ReviewAllCommand implements PetShopCommand {
 		CustomerVO cvo = new CustomerVO();
 		cvo.setC_idx("4");
 		cvo.setC_id("UUU");
-		cvo.setC_pwd("123");
+		/*cvo.setC_pwd("123");
 		cvo.setC_name("123");
 		cvo.setC_phone("123");
 		cvo.setC_addr("123");
 		cvo.setC_gender("남자");
-		cvo.setC_email("123");
+		cvo.setC_email("123");*/
 		
 		request.getSession().setAttribute("CustomerVO", cvo);
 		

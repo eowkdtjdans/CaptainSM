@@ -20,7 +20,7 @@ public class ReviewOneListCommand implements PetShopCommand {
 		vo.setR_idx((request.getParameter("r_idx")));
 		ReviewDAO.countUp(vo);
 		
-		//session에 저장
+		//session�뿉 ���옣
 		request.getSession().setAttribute("ReviewDataVO", ReviewDAO.getOneList(r_idx));
 		
 		List<RCommentVO> listC = ReviewDAO.getListC(r_idx);
