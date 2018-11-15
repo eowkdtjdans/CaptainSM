@@ -13,10 +13,6 @@
 
 <title>펫샵 - dogListView</title>
 <style>
-	.img-fluid {
-		width: 600px;
-		height: 300px;
-	}
 	
 	.b_img img {
 		width: 700px;
