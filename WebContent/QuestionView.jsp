@@ -59,7 +59,7 @@
 			if("${vo.q_id}" == "${c_id}"){
 				if(confirm("정말 수정하시겠습니까?")){
 					//yes
-					location.href="PSC?type=questionModify&q_idx=${vo.q_idx }";
+					location.href="PSC?type=questionModify&q_idx=${vo.q_idx}";
 				}else{
 					//no
 					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
@@ -75,12 +75,12 @@
 		}
 	}
 	
-	function modifyokC(qcvo) {
+	function modifyokC(qc_id) {
 		if("${c_id}" != ""){
-			if(qcvo.qc_id == "${c_id}"){
+			if(qc_id == "${c_id}"){
 				if(confirm("정말 수정하시겠습니까?")){
 					//yes
-					location.href="PSC?type=questionModifyComment&qc_idx=" + qcvo.qc_idx + "&q_idx=${vo.q_idx}";
+					location.href="PSC?type=questionModifyComment&qc_idx=" + qc_idx + "&q_idx=${vo.q_idx}";
 				}else{
 					//no
 					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
@@ -95,12 +95,12 @@
 		}
 	}
 	
-	function deleteokC(qcvo) {
+	function deleteokC(qc_id) {
 		if("${c_id}" != ""){
-			if(qcvo.qc_id == "${c_id}"){
+			if(qc_id == "${c_id}"){
 				if(confirm("정말 삭제하시겠습니까?")){
 					//yes
-					location.href="PSC?type=questionDeleteComment&qc_idx=" + qcvo.qc_idx + "&q_idx=${vo.q_idx}";
+					location.href="PSC?type=questionDeleteComment&qc_idx=" + qc_idx + "&q_idx=${vo.q_idx}";
 				}else{
 					//no
 					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
