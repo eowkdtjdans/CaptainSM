@@ -4,7 +4,7 @@ pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
 <html>
-
+<!-- 레지스터 비밀번호 널값일때 false해야함 -->
   <head>
 
     <meta charset="utf-8">
