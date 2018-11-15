@@ -78,6 +78,14 @@ pageEncoding="utf-8"%>
 		width: 440px;
 	}
 	
+	#map {
+        height: 350px;
+        width: 400px;
+        text-align: center;
+        /* display: inline-block; */
+       }
+	
+	
 	</style>
 
   <body>
@@ -242,9 +250,19 @@ pageEncoding="utf-8"%>
 		<br>
 		<br>
 		<h4><strong>사람과 동물, 모두가 행복해지는 세상을 꿈꿉니다.</strong></h4>
-	  </div>        
+	  </div>  
+	  
+	  
+	  <br><hr><br>
+	  <div class="col-md-12 text-center">
+            <div id="bg1" class="text-center text-muted">           
+              <h3>Happy Dog Way to come</h3>
+              <h5><strong>해피독 오시는 길</strong></h5>
+            </div> 
+             <div class="text-center" id="map"></div>
+      </div>     
 </div>
-</div>
+
 
     <!-- Footer -->
     <footer class="py-5 bg-white">
@@ -262,7 +280,26 @@ pageEncoding="utf-8"%>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    
+    
+    <script>
+      function initMap() {
+        var uluru = {lat: 13.759371, lng: 100.498293};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 19,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    
+    
+	<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzGwljrVKYTGaY7RfRjT8Ep4w2W4jV2Z4&callback=initMap">
+    </script>
   </body>
 
 </html>
