@@ -33,5 +33,6 @@
 			</table>
 		</div>
 	</form>
+	<%@include file="include/footer.jsp"%>
 </body>
 </html>

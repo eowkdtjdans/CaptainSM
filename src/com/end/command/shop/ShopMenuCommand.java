@@ -10,7 +10,12 @@ public class ShopMenuCommand implements PetShopCommand {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		
-		request.getSession().setAttribute("아이디", "hann");
+		//임시로
+		request.getSession().setAttribute("c_id", "hann");
+		
+		request.getSession().removeAttribute("fullname");
+		request.getSession().removeAttribute("caegory");
+		
 		
 		return "shopMenu.jsp";
 	}

@@ -18,7 +18,7 @@ public class ShopDeleteCommand implements PetShopCommand {
 		List<ShopCartVO> list = ShopDAO.get_all("hann");
 
 		String p_name = request.getParameter("p_name");
-		String id = (String)request.getSession().getAttribute("아이디");
+		String id = (String)request.getSession().getAttribute("c_id");
 		
 		Iterator<ShopCartVO> ite = list.iterator();
 		ShopCartVO vo = null;
