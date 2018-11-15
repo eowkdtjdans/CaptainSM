@@ -12,7 +12,7 @@
 
 <style>
 	#categoryTable {
-		border: 1px solid #808080;
+		
 		height: 100px;
 		width: 1110px;
 		padding: 10px 20px;
@@ -56,6 +56,35 @@
 		text-decoration: none;
 		color: #949494;
 	}
+	
+	
+	
+h3 {
+text-align : center;
+font-family: "Sandoll MiSaeng"; 
+font-size : 2.0em;
+margin-top : 2em;
+margin-left : -1em;
+margin-bottom : 5em;
+color : #964b00;
+
+}
+
+h3:before {
+content : "●";
+font-size : 1.2em;
+vertical-align : 110%;
+}
+
+h3:after {
+content : "●";
+font-size : 0.7em;
+vertical-align : -140%;
+}
+
+.left_m{
+margin-left : 1.5em;
+}
 </style>
 </head>
 <body>
@@ -64,7 +93,7 @@
 	<!-- Page Content -->
  	<div class="container">
  	
-	<h2 class="my-4">강아지 분양</h2>
+	<h3 class="col-md-12 text-center">댕댕이를 분양합니다!</h3>
 	
 	<div id="typeDog">
 		<ul id="categoryTable">
@@ -76,6 +105,7 @@
 				</span>
 			</li>
 			</c:forEach>
+			<hr>
 		</c:if>
 		</ul>
 	</div>

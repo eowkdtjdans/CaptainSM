@@ -15,7 +15,7 @@
 
 <style>
 	#categoryTable {
-		border: 1px solid #808080;
+		
 		height: 100px;
 		width: 1110px;
 		padding: 10px 20px;
@@ -61,6 +61,38 @@
 	}
 	
 	
+	
+	
+	
+	
+	h3 {
+text-align : center;
+font-family: "Sandoll MiSaeng"; 
+font-size : 2.0em;
+margin-top : 2em;
+margin-left : -1em;
+margin-bottom : 5em;
+color : #964b00;
+
+}
+
+h3:before {
+content : "●";
+font-size : 1.2em;
+vertical-align : 110%;
+}
+
+h3:after {
+content : "●";
+font-size : 0.7em;
+vertical-align : -140%;
+}
+
+.left_m{
+margin-left : 1.5em;
+}
+	
+	
 </style>
 <script>
 	function writeDog() {
@@ -77,20 +109,23 @@
 	<%@include file="include/header.jsp"%>
 
 	<!-- Page Content -->
- 	<div class="container">
+ 	<div class="container">	
  	
-	<h2 class="my-4">강아지 분양</h2>
+	<!-- <h3 class="my-4">강아지 분양</h3> -->  
+	<h3 class="col-md-12 text-center">댕댕이를 분양합니다!</h3>
 	
 	<div id="typeDog">
 		<ul id="categoryTable">
 		<c:if test="${not empty dogType}">
+			
 			<c:forEach var="dType" items="${dogType}">
 			<li>
 				<span>
-					<a href="PSC?type=dogCategory&cPage=1&dogCategory=${dType.key}">${dType.key}<em>(${dType.value})</em></a>
+					<a class="text-muted" href="PSC?type=dogCategory&cPage=1&dogCategory=${dType.key}">${dType.key}<em>(${dType.value})</em></a>
 				</span>
 			</li>
 			</c:forEach>
+			<hr>
 		</c:if>
 		</ul>
 	</div>

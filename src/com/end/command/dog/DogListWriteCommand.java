@@ -24,7 +24,7 @@ public class DogListWriteCommand implements PetShopCommand {
 			path = "dogListWrite.jsp";
 		} else {
 			String dbPath = "/CaptainSM/upload";
-			String uploadPath = "C:/Mystudy/201811151830/CaptainSM/WebContent/images";
+			String uploadPath = "C:/MyStudy/20181115/CaptainSM/WebContent/upload";
 			int size = 30*1024*1024;
 
 			File upDir = new File(uploadPath);
