@@ -168,14 +168,15 @@
 <div id="question" class="container">
 <!-- <table class="type" style="margin-left: auto; margin-right: auto;"> -->
 <table class="table table-hover">
-	<%-- <caption class="page-header"><h3>문의 게시판</h3></caption> --%>
+	
 	<h3 class="page-header">문의 게시판</h3>
 	<thead>	
 		<tr class="title">	
-			<th class="no">No</th>		
-			<th class="subject">제목</th>
-			<th class="id">아이디</th>			
-			<th class="quest_date">작성일</th>					
+			<td class="no">No</th>		
+			<td class="subject">제목</th>
+			<td class="id">아이디</th>			
+			<td class="quest_date">작성일</th>
+			<td>조회수</td>					
 		</tr>
 	</thead>
 	
@@ -199,6 +200,7 @@
 						</td>		
 						<td>${vo.q_id}</td>						
 						<td>${vo.q_date.substring(0, 10) }</td>
+						<td>${vo.q_review_count }</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
@@ -208,7 +210,7 @@
 	
 	<tfoot>
 		<tr>
-			<td colspan="3">
+			<td colspan="4">
 				<ol class="paging">
 				
 				<%--[이전으로]에 대한 사용여부 처리 --%>

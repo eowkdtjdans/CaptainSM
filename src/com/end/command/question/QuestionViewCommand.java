@@ -31,6 +31,8 @@ public class QuestionViewCommand implements PetShopCommand {
 		request.getSession().setAttribute("hit", hit);
 		
 		
+		QuestionDAO.QuestionCountUp(q_idx);
+		
 		
 		return "QuestionView.jsp";
 		

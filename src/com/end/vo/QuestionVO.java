@@ -8,8 +8,14 @@ public class QuestionVO {
 	String q_date;
 	String q_subject;
 	String q_content;
+	String q_review_count;
 	
-	
+	public String getQ_review_count() {
+		return q_review_count;
+	}
+	public void setQ_review_count(String q_review_count) {
+		this.q_review_count = q_review_count;
+	}
 	public int getQ_idx() {
 		return q_idx;
 	}

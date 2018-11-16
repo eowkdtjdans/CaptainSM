@@ -24,7 +24,7 @@ public class CustomerFindIdCommand implements PetShopCommand {
 			request.getSession().setAttribute("c_name", c_name);
 			request.getSession().setAttribute("c_id",  vo.getC_id());
 			
-			path = "MoonhoHome.jsp";
+			path = "index.jsp";
 		}
 		
 		return path;

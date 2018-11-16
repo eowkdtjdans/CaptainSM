@@ -291,39 +291,28 @@
 	
 	
 	<!-- 댓글 출력폼 -->
-		<c:forEach var="voC" items="${listC }">
-		<div class="container" style="border-bottom:1px solid darkgray; margin-bottom:15px;">
-		
-		
-			<form method="post" name="frm2" id="frm2">
-			<tr>
-				<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;${voC.getRc_id() }
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${voC.getRc_date().substring(0, 10) }</span>
-				
-				<div class="text-right">
+		<div class="container">
+		<hr>
+		<c:forEach var="voC" items="${listC }">				
+				&nbsp;${voC.getRc_id() }
+				<div class="text-right">${voC.getRc_date().substring(0, 10) }			
 					<c:choose>
 					<c:when test="${CustomerVO.getC_id() == voC.getRc_id() }">
 					<input type="button" value="삭제" onclick="c_delete_go(this.form)" class="btn btn-default">
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>
-					</c:choose>
-					
-					
-				</div>				
-				
-				<div colspan="2" id="content">
+					</c:choose>									
+				</div>								
+				<div>
 					${voC.getRc_content() }
-				</div>
-			
+				</div>	
+				<hr><hr>		
 				<input type="hidden" name="rc_idx" value="${voC.getRc_idx() }">
 				<input type="hidden" name="r_idx" value="${ReviewDataVO.getR_idx() }">
 				<input type="hidden" name="DBid" value="${voC.getRc_id() }" id="DBid">
-				
-			</tr>
-			</form>
-		</div>
 		</c:forEach>
+		</div>
 
 
 	<!-- 댓글 입력폼 -->

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.bc.mybatis.DBService;
 import com.end.vo.QuestionVO;
+import com.end.vo.ReviewDataVO;
 import com.end.vo.QcommentVO;
 
 public class QuestionDAO {
@@ -71,6 +72,10 @@ public class QuestionDAO {
 	
 	public static int QuestionDelete(String q_idx) {
 		return getSql().delete("questionDelete", q_idx);
+	}
+	
+	public static int QuestionCountUp(String q_idx) {
+		return getSql().update("questionCountUp", q_idx);
 	}
 	
 	

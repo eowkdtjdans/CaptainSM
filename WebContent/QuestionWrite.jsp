@@ -12,7 +12,7 @@
 <%@include file="include/include-link.jsp" %>
 <%@include file="include/include-style.jsp" %>
 <title>게시글 작성</title>
-<link rel="stylesheet" href="css/bootstrap.css">
+<!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
 <script>
 	function sendData() {
 		var firstForm = document.forms[0];

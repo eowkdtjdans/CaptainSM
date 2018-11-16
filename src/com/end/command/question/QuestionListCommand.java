@@ -48,7 +48,10 @@ public class QuestionListCommand implements PetShopCommand {
 		List<QuestionVO> questList = QuestionDAO.QuestionGetList(map);
 		request.setAttribute("questList", questList);
 		request.setAttribute("pvo", p);	
-
+		
+		
+		
+		
 		return "QuestionList.jsp";
 		
 	}

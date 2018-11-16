@@ -185,8 +185,7 @@ textarea{
 		<c:forEach var="vo" items="${qvo }">				
 				<div>
 					&nbsp;${vo.qc_id }
-					<div class="text-right">
-					<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+					<div class="text-right">				
 					${vo.qc_date }&nbsp;&nbsp;	
 					<a href="#" onclick="modifyokC('${vo.qc_id}','${vo.qc_idx}')">| 수정</a> |
 					<a href="#" onclick="deleteokC('${vo.qc_id}','${vo.qc_idx}')">| 삭제</a> |

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.css" />
-<link rel="stylesheet" href="css/custom.css" />
+<%@include file="include/include-link.jsp" %>
+<%@include file="include/include-style.jsp" %>
 <title>비밀번호 찾기</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
@@ -49,28 +50,61 @@
 				}); 
 				
 		 }
-	</script>  
+	</script> 
+
+<style>
+h3 {
+text-align : center;
+font-family: "Sandoll MiSaeng"; 
+font-size : 2.0em;
+margin-top : 2em;
+margin-left : -1em;
+margin-bottom : 5em;
+color : #964b00;
+
+}
+
+h3:before {
+content : "●";
+font-size : 1.2em;
+vertical-align : 110%;
+}
+
+h3:after {
+content : "●";
+font-size : 0.7em;
+vertical-align : -140%;
+}
+
+.left_m{
+margin-left : 1.5em;
+}
+</style>	
+ 
 </head>
 
 <body>
+<%@include file="include/header.jsp"%>
   <!--  action =login_ok.jsp  --> 
 <div class="container">
   <form method="post">
-	<table class="table table-bordered table-hover" style="text-align : center; border : 1px solid #dddddd" >
+	<table class="table table-hover" style="text-align : center;" >
 		<thead>
 			<tr>
 				<th colspan="3">
-					<h4 style="text-algin : center;" >비밀번호 찾기</h4>
+					<h3 style="text-algin : center;" >비밀번호 찾기</h3>
 				</th>
 			</tr>
 		</thead>
 		<tbody>
 	<tr>
-   		 <td>아이디<input type="text" id="c_id" name="c_id"  /><br/></td>
+   		 <td>아이디를 입력해주세요&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="c_id" name="c_id" style="width:250px;" /><br/></td>
     </tr>
 	
 	<tr>   
-     	<td>번호<input type="text" id="c_phone" name="c_phone" /><br/></td>
+     	<td>핸드폰 번호를 입력해주세요&emsp;&nbsp;&nbsp;<input type="text" id="c_phone" name="c_phone" style="width:250px;"/>
+     	<br><h6 class="text-muted text-left">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;예)01012345678</h6>
+     	</td>
    		
     </tr>
     	<tr>
@@ -80,11 +114,11 @@
     
     
 			<td style="text-algin: left" colspan="3">
-			<input class="btn btn-primary pull-right" type="submit"value="비밀번호 찾기" id="login" onclick="find_pwd(this.form)"/>
+			<input class="btn btn-outline-secondary pull-right" type="submit"value="비밀번호 찾기" id="login" onclick="find_pwd(this.form)"/>
 			
-			<input class="btn btn-primary pull-right" type="button" value="회원가입"
+			<input class="btn btn-outline-secondary pull-right" type="button" value="회원가입"
 			 onclick="location.href='CustomerRegister.jsp'"/>
-			<input class="btn btn-primary pull-right" type="button" value="메인화면"
+			<input class="btn btn-outline-secondary pull-right" type="button" value="메인화면"
 			 onclick="location.href='Home.jsp'"/>
 			<input type="hidden" name="find_pwdchk" value="chk"/>
 			</td>
@@ -94,5 +128,7 @@
 		</table>
   </form>
 </div>
+<%@include file="include/footer.jsp"%>
+<%@include file="include/include-js.jsp"%>
 </body>
 </html>
