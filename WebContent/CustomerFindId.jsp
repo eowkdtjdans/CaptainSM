@@ -18,8 +18,7 @@
 			alert("이름을 입력하세요");
 			frm.c_name.focus();
 			return false;
-		}
-		if (c_phone == "") {
+		} else if (c_phone == "") {
 			alert("핸드폰 번호를 입력하세요");
 			frm.c_pwd.focus();
 			return false;
@@ -32,6 +31,7 @@
 					var alist = result.list;
 					$.each(alist, function(CustomerVO) {
 						if(c_name == this.c_name && c_phone == this.c_phone) {
+							alert("아이디 : " + this.c_id);
 							frm.action = "PSC?type=CustomerFindId";
 							frm.submit(); 
 							return false;

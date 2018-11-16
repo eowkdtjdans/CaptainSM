@@ -32,14 +32,10 @@
 						var alist = result.list;
 						$.each(alist, function(CustomerVO) {
 							if(c_id == this.c_id && c_phone == this.c_phone) {
-								alert("데이터 있음");
-								//$('#"findId"').html('<p style="blue">당신의 아이디는 : ${c_id}</p>');
+								alert("비밀번호 : " + this.c_pwd);
 								 frm.action = "PSC?type=CustomerFindPwd";
 								 frm.submit(); 
 								 return false;
-							} else {
-								alert("데이터가 존재하지 않습니다.");
-								return false;
 							}
 						});
 					},

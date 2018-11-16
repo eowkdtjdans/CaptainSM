@@ -25,12 +25,11 @@ public class CustomerLoginCommand implements PetShopCommand {
 			CustomerVO vo = CustomerDAO.CustomergetDB(c_id);
 			
 			if (vo.getC_id().equals(c_id) && vo.getC_pwd().equals(c_pwd)) {
-				request.getSession().setAttribute("c_id", c_id);
-				request.getSession().setAttribute("c_pwd", c_pwd);
+				request.getSession().setAttribute("c_id", vo.getC_id());
+				request.getSession().setAttribute("c_pwd", vo.getC_pwd());
 				
 				path = "index.jsp";
 			} else {
-				request.setAttribute("login_chk", null);
 				path = "CustomerLogin.jsp";
 			}
 		}
