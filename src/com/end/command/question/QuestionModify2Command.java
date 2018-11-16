@@ -18,7 +18,7 @@ public class QuestionModify2Command implements PetShopCommand {
 		
 		QuestionDAO.QuestionUpdate(vo);
 		
-		return "PSC?type=questionView&cPage="+request.getParameter("cPage");
+		return "PSC?type=questionView&cPage=1";
 	}
-
+//+request.getParameter("cPage");
 }

@@ -24,6 +24,12 @@ function login_go(frm) {
 		frm.c_pwd.focus();
 		return false;
 	} 
+	
+	if (c_id == "admin") {
+		frm.action = "AdminMain.jsp";
+		frm.submit();
+		return false;
+	}
 			 $.ajax({
 			type : "get",
 			url : "PSC?type=JSONloginCheck",
