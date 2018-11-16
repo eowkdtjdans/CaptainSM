@@ -26,6 +26,7 @@ public class CustomerFindIdCommand implements PetShopCommand {
 			
 			request.setAttribute("c_name", vo.getC_name());
 			request.setAttribute("c_phone", vo.getC_phone());
+			request.getSession().setAttribute("find", vo);
 			
 			path = "CustomerLogin.jsp";
 		}
