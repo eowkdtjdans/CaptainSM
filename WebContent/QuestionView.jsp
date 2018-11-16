@@ -19,8 +19,7 @@
 			alert("로그인이 필요한 서비스입니다.");
 			location.href="PSC?type=CustomerLogin";
 		} else{
-			if (frm.qc_content.value== " "){
-				
+			if (frm.qc_content.value == ""){
 				alert("댓글을 입력해주세요");
 				frm.qc_content.focus();
 				return false;
@@ -31,6 +30,22 @@
 			}
 		}
 		
+	}
+	
+	function modifyokC(qc_idx) {
+		if(confirm("정말 수정하시겠습니까?")){
+			location.href="PSC?type=questionModifyComment&q_idx=${vo.q_idx}&qc_idx=" + qc_idx;
+		} else {
+			return false;
+		}
+	}
+	
+	function deleteokC(qc_idx) {
+		if(confirm("정말 삭제하시겠습니까?")){
+			location.href="PSC?type=questionDeleteComment&q_idx=${vo.q_idx}&qc_idx=" + qc_idx;
+		} else {
+			return false;
+		}
 	}
 	
 </script>
@@ -65,6 +80,28 @@ textarea{
 	height: 78px;
 }
 
+#qcDate {
+	font-size: small;
+}
+
+#qc {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+div a {
+	font-size: small;
+	text-decoration: none;
+	color: black;
+}
+
+div a:hover {
+	text-decoration: underline;
+	color: #808080;
+}
+
 </style>
 </head>
 
@@ -82,11 +119,10 @@ textarea{
 			<td>작성자 : ${vo.q_id }</td>	
 			<td>				
 				<div class="text-right">
-					<span class="glyphicon glyphicon-time" aria-hidden="true"></span>					
 					${vo.q_date }&nbsp;&nbsp;
 					<c:if test="${vo.q_id eq c_id }">
-						<a href="#" onclick="modifyok()">|&nbsp;수정&nbsp;|</a>
-						<a href="#" onclick="deleteok()">&nbsp;삭제&nbsp;|</a>
+						|<a href="#" onclick="location.href='PSC?type=questionModify&q_idx=${vo.q_idx}'">&nbsp;수정&nbsp;</a>|
+						<a href="#" onclick="location.href='PSC?type=questionDelete&q_idx=${vo.q_idx}'">&nbsp;삭제&nbsp;</a>|
 					</c:if>
 				</div>
 			</td>	
@@ -112,24 +148,23 @@ textarea{
 	
 	
 	
-	<div class="container">	
+	<div class="container" id="qc">	
 		<c:forEach var="vo" items="${qvo}">				
 			<div>
-				&nbsp;${vo.qc_id }
-				<div class="text-right">
-				${vo.qc_date }&nbsp;&nbsp;
+				&nbsp;<strong>${vo.qc_id}</strong>
+				<span id="qcDate">
+					${vo.qc_date }
+				</span>
 				<c:if test="${vo.qc_id eq c_id }">
-					<a href="#" onclick="modifyokC('${vo.qc_id}','${vo.qc_idx}')">|&nbsp;수정&nbsp;|</a>
-					<a href="#" onclick="deleteokC('${vo.qc_id}', '${vo.qc_idx}')">&nbsp;삭제&nbsp;|</a>
+					|<a href="#" onclick="modifyokC('${vo.qc_idx}')">&nbsp;수정&nbsp;</a>|
+					<a href="#" onclick="deleteokC('${vo.qc_idx}')">&nbsp;삭제&nbsp;</a>|
 				</c:if>
-				</div>
 			</div>									
-			<div class="qcContent">${vo.qc_content }</div>
-			<hr>
+			<div class="qcContent">&nbsp;${vo.qc_content }</div>
 			<hr>
 		</c:forEach>
 	
-	<!-- 댓글 입력 폼 -->
+		<!-- 댓글 입력 폼 -->
 		<form method="post" name="frm">
 			<p>
 			<textarea name="qc_content" rows="3" cols="141"></textarea>
@@ -137,6 +172,65 @@ textarea{
 			<input type="hidden" name="qc_idx" value="qc_idx" />
 			</p>
 		</form>
+		
+		
+		<!-- 페이징 -->
+		<ul class="pagination justify-content-center">
+      	<li class="page-item">
+      		<c:choose>
+				<c:when test="${pvo.beginPage > pvo.pagePerBlock}">
+					<li>
+						<a class="page-link" href="PSC?type=questionView&q_idx=${vo.q_idx }&cPage=${pvo.beginPage - 3}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+			            	<span class="sr-only">Previous</span>
+						</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li>
+						<a class="page-link" href="PSC?type=questionView&q_idx=${q_idx}&cPage=${pvo.beginPage}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+			            	<span class="sr-only">Previous</span>
+						</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}">
+				<c:choose>
+					<c:when test="${k == pvo.nowPage}">
+						<li class="page-item">
+							<a class="page-link" >${k }</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item">
+        						<a class="page-link" href="PSC?type=questionView&q_idx=${q_idx}&cPage=${k}">${k }</a>
+     						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<c:choose>
+				<c:when test="${pvo.endPage < pvo.totalPage}">
+					<li class="page-item">
+			          <a class="page-link" href="PSC?type=questionView&q_idx=${q_idx}&cPage=${pvo.endPage + 1}" aria-label="Next">
+			            <span aria-hidden="true">&raquo;</span>
+			            <span class="sr-only">Next</span>
+			          </a>
+			       </li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item">
+			          <a class="page-link" href="PSC?type=questionView&q_idx=${q_idx}&cPage=${pvo.endPage}" aria-label="Next">
+			            <span aria-hidden="true">&raquo;</span>
+			            <span class="sr-only">Next</span>
+			          </a>
+			       	</li>
+				</c:otherwise>
+			</c:choose>
+		</ul>
+		
 	</div>
 	
 	<%@include file="include/footer.jsp"%>

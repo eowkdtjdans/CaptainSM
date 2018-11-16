@@ -418,7 +418,8 @@
 	
 	<!-- 전체게시글 수 조회 -->
 	<select resultType="int" id="questionTotalCount">
-	SELECT COUNT(Q_IDX) FROM QUESTION </select>
+		SELECT COUNT(Q_IDX) FROM QUESTION
+	</select>
 	
 	<!-- 글쓰기 insert -->
 	<insert parameterType="com.end.vo.QuestionVO" id="questionInsert">
@@ -439,12 +440,22 @@
 	VALUES (Q_COMMENT_SEQ.NEXTVAL, #{qc_id},#{q_idx} , SYSDATE, #{qc_content}) </insert>
 	
 	<!-- 댓글조회 -->
-	<select resultType="com.end.vo.QcommentVO" id="questionOne2">
-	SELECT * FROM Q_COMMENT WHERE Q_IDX=#{q_idx} </select>
+	<select id="questionOne2" resultType="com.end.vo.QcommentVO" parameterType="Map">
+		SELECT R_NUM, QC2.*
+		  FROM (SELECT ROWNUM R_NUM, QC.*
+		          FROM (Q_COMMENT) QC
+		          WHERE Q_IDX = #{q_idx}
+		          ORDER BY QC_IDX DESC
+		        ) QC2
+		  WHERE R_NUM BETWEEN #{begin} AND #{end}
+		  AND Q_IDX = #{q_idx}
+		  ORDER BY QC_IDX DESC
+	</select>
 	
 	<!-- 댓글수 -->
 	<select parameterType="String" resultType="int" id="questionCommentcount">
-	SELECT COUNT(Q_IDX) FROM Q_COMMENT WHERE Q_IDX=#{q_idx} </select>
+		SELECT COUNT(Q_IDX) FROM Q_COMMENT WHERE Q_IDX=#{q_idx} 
+	</select>
 	
 	<select resultType="com.end.vo.QcommentVO" id="questionCommentone">
 	SELECT * FROM Q_COMMENT WHERE QC_IDX=#{qc_idx} </select>

@@ -16,7 +16,7 @@
 <style>
 	#categoryTable {
 		
-		height: 100px;
+		height: 130px;
 		width: 1110px;
 		padding: 10px 20px;
 	}
@@ -31,7 +31,7 @@
 	
 	#categoryTable li a {
 		text-decoration: none;
-		color: black;
+		color: #808080;
 	}
 	
 	#categoryTable li a:hover {
@@ -126,14 +126,14 @@ h5{
 		<c:if test="${not empty dogType}">
 			<li>
 				<span>
-					<a class="text-muted" href="PSC?type=dogList&cPage=1">전체보기<em>(${totalDog})</em></a>
+					<a href="PSC?type=dogList&cPage=1">전체보기<em>(${totalDog})</em></a>
 				</span>
 			</li>
 			
 			<c:forEach var="dType" items="${dogType}">
 			<li>
 				<span>
-					<a class="text-muted" href="PSC?type=dogCategory&cPage=1&dogCategory=${dType.key}">${dType.key}<em>(${dType.value})</em></a>
+					<a href="PSC?type=dogCategory&cPage=1&dogCategory=${dType.key}">${dType.key}<em>(${dType.value})</em></a>
 				</span>
 			</li>
 			</c:forEach>
@@ -151,9 +151,9 @@ h5{
 							<img src = "${dList.d_img1}" onerror="this.src='/CaptainSM/upload/noImg.jpg'" alt="${dList.d_type}">
 						</a>
 						<div class="card-body">
-							<h4 class="card-title">
-								<h5><a href="PSC?type=dogListView&d_idx=${dList.d_idx}">${dList.d_title}</a></h5>
-							</h4>
+							<h5 class="card-title">
+								<a href="PSC?type=dogListView&d_idx=${dList.d_idx}">${dList.d_title}</a>
+							</h5>
 						</div>
 					</div>
 				</div>

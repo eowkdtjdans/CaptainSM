@@ -37,16 +37,15 @@
 							if(c_id == this.c_id && c_pwd == this.c_pwd) {
 								frm.action = "PSC?type=CustomerLogin";
 								frm.submit();
-							return false;
-							} 
+								return false;
+							} else {
+								alert("잘못 입력하셨습니다.");
+								return false;
+							}
 						});
 					},
 					error : function(jqXHR, textStatus, errorThrown){
 						console.log(jqXHR.status);
-						alert("실패 : \n"
-							+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-							+ "textStatus : " + textStatus + "\n"
-							+ "errorThrown : " + errorThrown);
 					}
 				}); 
 				
@@ -100,11 +99,11 @@ h3:after {
 		</thead>
 		<tbody>
 	<tr>
-   		 <td>ID&nbsp;&nbsp;<input type="text" id="c_id" name="c_id" placeholder="아이디" style="width:200px"/><br/></td>
+   		 <td>ID&emsp;&nbsp;&nbsp;<input type="text" id="c_id" name="c_id" placeholder="아이디" style="width:200px"/><br/></td>
     </tr>
 	
 	<tr>   
-     	<td>PWD&nbsp;&nbsp;<input type="password" id="c_pwd" name="c_pwd" placeholder="패스워드" /><br/></td>
+     	<td>PWD&nbsp;&nbsp;<input type="password" id="c_pwd" name="c_pwd" placeholder="패스워드" style="width:200px"/><br/></td>
    		
     </tr>
     

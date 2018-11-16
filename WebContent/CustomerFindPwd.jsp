@@ -36,6 +36,9 @@
 								 frm.action = "PSC?type=CustomerFindPwd";
 								 frm.submit(); 
 								 return false;
+							} else {
+								alert("데이터가 존재하지 않습니다.");
+								return false;
 							}
 						});
 					},

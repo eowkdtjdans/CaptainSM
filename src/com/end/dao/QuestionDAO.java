@@ -45,8 +45,8 @@ public class QuestionDAO {
 		return getSql().insert("questionInsert2", qvo);
 	}
 	
-	public static List<QcommentVO> QuestionOneList2(String qvo) {
-		return getSql().selectList("questionOne2", qvo);
+	public static List<QcommentVO> QuestionOneList2(Map<String, Integer> map) {
+		return getSql().selectList("questionOne2", map);
 	}
 	
 	public static int QuestionCommentCount(String q_idx) {
@@ -72,7 +72,7 @@ public class QuestionDAO {
 	public static int QuestionDelete(String q_idx) {
 		return getSql().delete("questionDelete", q_idx);
 	}
-	
+
 	
 }
 

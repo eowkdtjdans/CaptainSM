@@ -14,7 +14,9 @@ public class UpdateCommand implements PetShopCommand {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		List<ShopCartVO> list = ShopDAO.get_all("hann");
+		String id = (String)request.getSession().getAttribute("c_id");
+		
+		List<ShopCartVO> list = ShopDAO.get_all(id);
 		
 		String p_name = request.getParameter("p_name");
 		
