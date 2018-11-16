@@ -91,7 +91,13 @@ vertical-align : -140%;
 .left_m{
 margin-left : 1.5em;
 }
-	
+
+h5 a{
+	color: black;	
+}
+h5{
+	text-align: center;
+}	
 	
 </style>
 <script>
@@ -140,7 +146,7 @@ margin-left : 1.5em;
 						</a>
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="PSC?type=dogListView&d_idx=${dList.d_idx}">${dList.d_title}</a>
+								<h5><a href="PSC?type=dogListView&d_idx=${dList.d_idx}">${dList.d_title}</a></h5>
 							</h4>
 						</div>
 					</div>
