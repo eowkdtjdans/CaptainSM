@@ -91,7 +91,7 @@ vertical-align : -140%;
 .left_m{
 margin-left : 1.5em;
 }
-	
+
 	
 </style>
 <script>
@@ -117,6 +117,11 @@ margin-left : 1.5em;
 	<div id="typeDog">
 		<ul id="categoryTable">
 		<c:if test="${not empty dogType}">
+			<li>
+				<span>
+					<a class="text-muted" href="PSC?type=dogList&cPage=1">전체보기<em>(${totalDog})</em></a>
+				</span>
+			</li>
 			
 			<c:forEach var="dType" items="${dogType}">
 			<li>
