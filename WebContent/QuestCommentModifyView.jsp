@@ -206,7 +206,7 @@ textarea{
 			<td>작성자 : ${vo.q_id }</td>	
 			<td>				
 				<div class="text-right">
-					<span class="glyphicon glyphicon-time" aria-hidden="true"></span>					
+										
 					${vo.q_date }&nbsp;&nbsp;<!-- | -->
 <%-- 					<a href="MyController?type=modify&q_idx=${vo.q_idx }">수정 |</a>										
 					<a href="#" onclick="deleteok()">삭제 |</a>		 --%>		
