@@ -11,8 +11,6 @@ public class ShopMenuCommand implements PetShopCommand {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		
 		//임시로
-		request.getSession().setAttribute("c_id", "hann");
-		
 		request.getSession().removeAttribute("fullname");
 		request.getSession().removeAttribute("caegory");
 		

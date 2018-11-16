@@ -1,5 +1,8 @@
 package com.end.command.customer;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,10 +24,10 @@ public class CustomerFindIdCommand implements PetShopCommand {
 			String c_name = request.getParameter("c_name");
 			CustomerVO vo = CustomerDAO.CustomerFindId(c_name);
 			
-			request.getSession().setAttribute("c_name", c_name);
-			request.getSession().setAttribute("c_id",  vo.getC_id());
+			request.setAttribute("c_name", vo.getC_name());
+			request.setAttribute("c_phone", vo.getC_phone());
 			
-			path = "index.jsp";
+			path = "CustomerLogin.jsp";
 		}
 		
 		return path;

@@ -14,11 +14,10 @@ public class ShopDeleteCommand implements PetShopCommand {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-	
-		List<ShopCartVO> list = ShopDAO.get_all("hann");
-
 		String p_name = request.getParameter("p_name");
 		String id = (String)request.getSession().getAttribute("c_id");
+		
+		List<ShopCartVO> list = ShopDAO.get_all(id);
 		
 		Iterator<ShopCartVO> ite = list.iterator();
 		ShopCartVO vo = null;

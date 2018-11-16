@@ -196,9 +196,9 @@
 					<tr>
 						<td>${vo.q_idx }</td>
 						<td>
-							<a href="PSC?type=questionView&q_idx=${vo.q_idx }">${vo.q_subject }</a>
-						</td>		
-						<td>${vo.q_id}</td>						
+							<a href="PSC?type=questionView&q_idx=${vo.q_idx}&cPage=1">${vo.q_subject }</a>
+						</td>
+						<td>${vo.q_id}</td>
 						<td>${vo.q_date.substring(0, 10) }</td>
 						<td>${vo.q_review_count }</td>
 					</tr>

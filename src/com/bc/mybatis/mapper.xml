@@ -411,19 +411,20 @@
 	<!-- ===============================문호씨꺼============================= -->
 	<!-- 전체게시글 조회 -->
 	<select parameterType="Map" resultType="com.end.vo.QuestionVO" id="questionList">
-	SELECT R_NUM, Q_IDX, Q_ID, Q_NAME, Q_PHONE,Q_DATE, Q_SUBJECT, Q_CONTENT, Q_REVIEW_COUNT
+	SELECT R_NUM, Q_IDX, Q_ID, Q_NAME, Q_PHONE,Q_DATE, Q_SUBJECT, Q_CONTENT 
 	FROM (SELECT ROWNUM R_NUM, B.*FROM (SELECT *FROM QUESTION ORDER BY Q_IDX DESC) B)
 	WHERE R_NUM BETWEEN #{begin} AND #{end} 
 	</select>
 	
 	<!-- 전체게시글 수 조회 -->
-    <select resultType="int" id="questionTotalCount">
-	SELECT COUNT(Q_IDX) FROM QUESTION </select>
+	<select resultType="int" id="questionTotalCount">
+		SELECT COUNT(Q_IDX) FROM QUESTION
+	</select>
 	
 	<!-- 글쓰기 insert -->
 	<insert parameterType="com.end.vo.QuestionVO" id="questionInsert">
-	INSERT INTO QUESTION(Q_IDX, Q_ID, Q_SUBJECT, Q_CONTENT, Q_DATE, Q_REVIEW_COUNT) 
-	VALUES (QUESTION_SEQ.NEXTVAL, #{q_id}, #{q_subject}, #{q_content}, SYSDATE, 0) </insert>
+	INSERT INTO QUESTION(Q_IDX, Q_ID, Q_SUBJECT, Q_CONTENT, Q_DATE) 
+	VALUES (QUESTION_SEQ.NEXTVAL, #{q_id}, #{q_subject}, #{q_content}, SYSDATE) </insert>
 	
 	<!-- 하나의 게시물 조회onelist -->
 	<select resultType="com.end.vo.QuestionVO" id="questionOne">
@@ -439,12 +440,22 @@
 	VALUES (Q_COMMENT_SEQ.NEXTVAL, #{qc_id},#{q_idx} , SYSDATE, #{qc_content}) </insert>
 	
 	<!-- 댓글조회 -->
-	<select resultType="com.end.vo.QcommentVO" id="questionOne2">
-	SELECT * FROM Q_COMMENT WHERE Q_IDX=#{q_idx} </select>
+	<select id="questionOne2" resultType="com.end.vo.QcommentVO" parameterType="Map">
+		SELECT R_NUM, QC2.*
+		  FROM (SELECT ROWNUM R_NUM, QC.*
+		          FROM (Q_COMMENT) QC
+		          WHERE Q_IDX = #{q_idx}
+		          ORDER BY QC_IDX DESC
+		        ) QC2
+		  WHERE R_NUM BETWEEN #{begin} AND #{end}
+		  AND Q_IDX = #{q_idx}
+		  ORDER BY QC_IDX DESC
+	</select>
 	
 	<!-- 댓글수 -->
 	<select parameterType="String" resultType="int" id="questionCommentcount">
-	SELECT COUNT(Q_IDX) FROM Q_COMMENT WHERE Q_IDX=#{q_idx} </select>
+		SELECT COUNT(Q_IDX) FROM Q_COMMENT WHERE Q_IDX=#{q_idx} 
+	</select>
 	
 	<select resultType="com.end.vo.QcommentVO" id="questionCommentone">
 	SELECT * FROM Q_COMMENT WHERE QC_IDX=#{qc_idx} </select>
@@ -461,29 +472,11 @@
 	<delete parameterType="String" id="questionDelete">
 	DELETE QUESTION WHERE Q_IDX= #{q_idx} </delete>
 	
-	<!-- 게시글조회수 -->
 	<update id="questionCountUp" parameterType="String">
 	UPDATE QUESTION SET Q_REVIEW_COUNT = Q_REVIEW_COUNT+1  WHERE Q_IDX = #{q_idx }
 	<!-- Q_COUNT_SEQ.NEXTVAL -->
 	</update>
 	
-	
-	
-	
-	
-	
+
+
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.bc.mybatis.DBService;
 import com.end.vo.QuestionVO;
-import com.end.vo.ReviewDataVO;
 import com.end.vo.QcommentVO;
 
 public class QuestionDAO {
@@ -46,8 +45,8 @@ public class QuestionDAO {
 		return getSql().insert("questionInsert2", qvo);
 	}
 	
-	public static List<QcommentVO> QuestionOneList2(String qvo) {
-		return getSql().selectList("questionOne2", qvo);
+	public static List<QcommentVO> QuestionOneList2(Map<String, Integer> map) {
+		return getSql().selectList("questionOne2", map);
 	}
 	
 	public static int QuestionCommentCount(String q_idx) {
@@ -77,7 +76,7 @@ public class QuestionDAO {
 	public static int QuestionCountUp(String q_idx) {
 		return getSql().update("questionCountUp", q_idx);
 	}
-	
+
 	
 }
 

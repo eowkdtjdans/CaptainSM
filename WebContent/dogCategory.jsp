@@ -98,10 +98,16 @@ margin-left : 1.5em;
 	<div id="typeDog">
 		<ul id="categoryTable">
 		<c:if test="${not empty dogType}">
+			<li>
+				<span>
+					<a class="text-muted" href="PSC?type=dogList&cPage=1">전체보기<em>(${totalDog})</em></a>
+				</span>
+			</li>
+			
 			<c:forEach var="dType" items="${dogType}">
 			<li>
 				<span>
-					<a href="PSC?type=dogCategory&cPage=1&dogCategory=${dType.key}">${dType.key}<em>(${dType.value})</em></a>
+					<a class="text-muted" href="PSC?type=dogCategory&cPage=1&dogCategory=${dType.key}">${dType.key}<em>(${dType.value})</em></a>
 				</span>
 			</li>
 			</c:forEach>
@@ -140,7 +146,7 @@ margin-left : 1.5em;
       		<c:choose>
 				<c:when test="${pvo.beginPage > pvo.pagePerBlock}">
 					<li>
-						<a class="page-link" href="PSC?type=dogList&cPage=${pvo.beginPage - 3}" aria-label="Previous">
+						<a class="page-link" href="PSC?type=dogCategory&dogCategory=${dogCategory}&cPage=${pvo.beginPage - 3}" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 			            	<span class="sr-only">Previous</span>
 						</a>
@@ -148,7 +154,7 @@ margin-left : 1.5em;
 				</c:when>
 				<c:otherwise>
 					<li>
-						<a class="page-link" href="PSC?type=dogList&cPage=${pvo.beginPage}" aria-label="Previous">
+						<a class="page-link" href="PSC?type=dogCategory&dogCategory=${dogCategory}&cPage=${pvo.beginPage}" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 			            	<span class="sr-only">Previous</span>
 						</a>
@@ -165,7 +171,7 @@ margin-left : 1.5em;
 					</c:when>
 					<c:otherwise>
 						<li class="page-item">
-        						<a class="page-link" href="PSC?type=dogList&cPage=${k}">${k }</a>
+        						<a class="page-link" href="PSC?type=dogCategory&dogCategory=${dogCategory}&cPage=${k}">${k }</a>
      						</li>
 					</c:otherwise>
 				</c:choose>
@@ -174,7 +180,7 @@ margin-left : 1.5em;
 			<c:choose>
 				<c:when test="${pvo.endPage < pvo.totalPage}">
 					<li class="page-item">
-			          <a class="page-link" href="PSC?type=dogList&cPage=${pvo.endPage + 1}" aria-label="Next">
+			          <a class="page-link" href="PSC?type=dogCategory&dogCategory=${dogCategory}&cPage=${pvo.endPage + 1}" aria-label="Next">
 			            <span aria-hidden="true">&raquo;</span>
 			            <span class="sr-only">Next</span>
 			          </a>
@@ -182,7 +188,7 @@ margin-left : 1.5em;
 				</c:when>
 				<c:otherwise>
 					<li class="page-item">
-			          <a class="page-link" href="PSC?type=dogList&cPage=${pvo.endPage}" aria-label="Next">
+			          <a class="page-link" href="PSC?type=dogCategory&dogCategory=${dogCategory}&cPage=${pvo.endPage}" aria-label="Next">
 			            <span aria-hidden="true">&raquo;</span>
 			            <span class="sr-only">Next</span>
 			          </a>

@@ -17,6 +17,8 @@ public class DogListCommand implements PetShopCommand {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		PagingVO pvo = new PagingVO(); //페이징VO 객체생성
 		
+		int totalDog = DogDAO.countDogList();
+		
 		int totalPage = DogDAO.countDogList(); //DOG테이블 데이터수 조회후 전체 페이지(게시글)수 지정
 		
 		pvo.setTotalRecord(totalPage);
@@ -58,6 +60,7 @@ public class DogListCommand implements PetShopCommand {
 		request.setAttribute("pvo", pvo);
 		request.setAttribute("dogList", dogList);
 		
+		request.getSession().setAttribute("totalDog", totalDog);
 		request.getSession().setAttribute("dogType", dogType);
 		
 		

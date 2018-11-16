@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <meta name="description" content="">
- <meta name="author" content="">
+<meta name="description" content="">
+<meta name="author" content="">
 <title>문의 게시판</title>
 
 <%@include file="include/include-link.jsp" %>
@@ -19,8 +19,7 @@
 			alert("로그인이 필요한 서비스입니다.");
 			location.href="PSC?type=CustomerLogin";
 		} else{
-			if (frm.qc_content.value== " "){
-				
+			if (frm.qc_content.value == ""){
 				alert("댓글을 입력해주세요");
 				frm.qc_content.focus();
 				return false;
@@ -33,85 +32,19 @@
 		
 	}
 	
-	function deleteok(){
-		if("${c_id}" != ""){
-			if("${vo.q_id}" == "${c_id}"){
-				if(confirm("정말 삭제하시겠습니까?")){
-					//yes
-					location.href="PSC?type=questionDelete&q_idx=${vo.q_idx }";
-				}else{
-					//no
-					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
-				
-				}
-			} else {
-				alert("자신의 게시물만 삭제할 수 있습니다.");
-				return false;
-			}
+	function modifyokC(qc_idx) {
+		if(confirm("정말 수정하시겠습니까?")){
+			location.href="PSC?type=questionModifyComment&q_idx=${vo.q_idx}&qc_idx=" + qc_idx;
 		} else {
-			alert("로그인이 필요한 서비스입니다.");
-			location.href="PSC?type=CustomerLogin";
+			return false;
 		}
 	}
 	
-	function modifyok() {
-		if("${c_id}" != ""){
-			if("${vo.q_id}" == "${c_id}"){
-				if(confirm("정말 수정하시겠습니까?")){
-					//yes
-					location.href="PSC?type=questionModify&q_idx=${vo.q_idx}";
-				}else{
-					//no
-					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
-				
-				}
-			} else {
-				alert("자신의 게시물만 수정할 수 있습니다.");
-				return false;
-			}
+	function deleteokC(qc_idx) {
+		if(confirm("정말 삭제하시겠습니까?")){
+			location.href="PSC?type=questionDeleteComment&q_idx=${vo.q_idx}&qc_idx=" + qc_idx;
 		} else {
-			alert("로그인이 필요한 서비스입니다.");
-			location.href="PSC?type=CustomerLogin";
-		}
-	}
-	
-	function modifyokC(qc_id, qc_idx) {
-		if("${c_id}" != ""){
-			if(qc_id == "${c_id}"){
-				if(confirm("정말 수정하시겠습니까?")){
-					//yes
-					location.href="PSC?type=questionModifyComment&qc_idx=" + qc_idx + "&q_idx=${vo.q_idx}";
-				}else{
-					//no
-					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
-				}
-			} else {
-				alert("자신의 댓글만 수정할 수 있습니다.");
-				return false;
-			}
-		} else {
-			alert("로그인이 필요한 서비스입니다.");
-			location.href="PSC?type=CustomerLogin";
-		}
-	}
-	
-	function deleteokC(qc_id, qc_idx) {
-		if("${c_id}" != ""){
-			if(qc_id == "${c_id}"){
-				if(confirm("정말 삭제하시겠습니까?")){
-					//yes
-					location.href="PSC?type=questionDeleteComment&qc_idx=" + qc_idx + "&q_idx=${vo.q_idx}";
-				}else{
-					//no
-					location.href="PSC?type=questionView&q_idx=${vo.q_idx}";
-				}
-			} else {
-				alert("자신의 댓글만 삭제할 수 있습니다.");
-				return false;
-			}
-		} else {
-			alert("로그인이 필요한 서비스입니다.");
-			location.href="PSC?type=CustomerLogin";
+			return false;
 		}
 	}
 	
@@ -136,6 +69,39 @@ textarea{
 	resize:none;
 }
 
+#qcContent {
+	height: 50px;
+}
+
+
+#click {
+	vertical-align: top;
+	width: 88px;
+	height: 78px;
+}
+
+#qcDate {
+	font-size: small;
+}
+
+#qc {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+div a {
+	font-size: small;
+	text-decoration: none;
+	color: black;
+}
+
+div a:hover {
+	text-decoration: underline;
+	color: #808080;
+}
+
 </style>
 </head>
 
@@ -153,10 +119,11 @@ textarea{
 			<td>작성자 : ${vo.q_id }</td>	
 			<td>				
 				<div class="text-right">
-									
-					${vo.q_date }&nbsp;&nbsp;|
-					<a href="#" onclick="modifyok()">수정 |</a>										
-					<a href="#" onclick="deleteok()">삭제 |</a>				
+					${vo.q_date }&nbsp;&nbsp;
+					<c:if test="${vo.q_id eq c_id }">
+						|<a href="#" onclick="location.href='PSC?type=questionModify&q_idx=${vo.q_idx}'">&nbsp;수정&nbsp;</a>|
+						<a href="#" onclick="location.href='PSC?type=questionDelete&q_idx=${vo.q_idx}'">&nbsp;삭제&nbsp;</a>|
+					</c:if>
 				</div>
 			</td>	
 		</tr>
@@ -181,33 +148,89 @@ textarea{
 	
 	
 	
-	<div class="container">		
-		<c:forEach var="vo" items="${qvo }">				
-				<div>
-					&nbsp;${vo.qc_id }
-					<div class="text-right">				
-					${vo.qc_date }&nbsp;&nbsp;	
-					<a href="#" onclick="modifyokC('${vo.qc_id}','${vo.qc_idx}')">| 수정</a> |
-					<a href="#" onclick="deleteokC('${vo.qc_id}','${vo.qc_idx}')">| 삭제</a> |
-					</div>
-				</div>									
-				<div>${vo.qc_content }</div>
-				<hr>
-				<hr>
+	<div class="container" id="qc">	
+		<c:forEach var="vo" items="${qvo}">				
+			<div>
+				&nbsp;<strong>${vo.qc_id}</strong>
+				<span id="qcDate">
+					${vo.qc_date }
+				</span>
+				<c:if test="${vo.qc_id eq c_id }">
+					|<a href="#" onclick="modifyokC('${vo.qc_idx}')">&nbsp;수정&nbsp;</a>|
+					<a href="#" onclick="deleteokC('${vo.qc_idx}')">&nbsp;삭제&nbsp;</a>|
+				</c:if>
+			</div>									
+			<div class="qcContent">&nbsp;${vo.qc_content }</div>
+			<hr>
 		</c:forEach>
-	 </div>
 	
-	<!-- 댓글 입력 폼 -->
-	<div class="container">   
-	<div class="row">
-	<form method="post" name="frm">
-		<p>
-		<textarea name="qc_content" rows="3" cols="130"></textarea>
-		<input class="btn btn-outline-secondary" type="button" value="등록" onclick="login_chk(this.form)">
-		<input type="hidden" name="qc_idx" value="qc_idx" />
-		</p>
-	</form>
-	</div>
+		<!-- 댓글 입력 폼 -->
+		<form method="post" name="frm">
+			<p>
+			<textarea name="qc_content" rows="3" cols="141"></textarea>
+			<input class="btn btn-outline-secondary" id="click" type="button" value="등록" onclick="login_chk(this.form)">
+			<input type="hidden" name="qc_idx" value="qc_idx" />
+			</p>
+		</form>
+		
+		
+		<!-- 페이징 -->
+		<ul class="pagination justify-content-center">
+      	<li class="page-item">
+      		<c:choose>
+				<c:when test="${pvo.beginPage > pvo.pagePerBlock}">
+					<li>
+						<a class="page-link" href="PSC?type=questionView&q_idx=${vo.q_idx }&cPage=${pvo.beginPage - 3}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+			            	<span class="sr-only">Previous</span>
+						</a>
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li>
+						<a class="page-link" href="PSC?type=questionView&q_idx=${q_idx}&cPage=${pvo.beginPage}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+			            	<span class="sr-only">Previous</span>
+						</a>
+					</li>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}">
+				<c:choose>
+					<c:when test="${k == pvo.nowPage}">
+						<li class="page-item">
+							<a class="page-link" >${k }</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item">
+        						<a class="page-link" href="PSC?type=questionView&q_idx=${q_idx}&cPage=${k}">${k }</a>
+     						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<c:choose>
+				<c:when test="${pvo.endPage < pvo.totalPage}">
+					<li class="page-item">
+			          <a class="page-link" href="PSC?type=questionView&q_idx=${q_idx}&cPage=${pvo.endPage + 1}" aria-label="Next">
+			            <span aria-hidden="true">&raquo;</span>
+			            <span class="sr-only">Next</span>
+			          </a>
+			       </li>
+				</c:when>
+				<c:otherwise>
+					<li class="page-item">
+			          <a class="page-link" href="PSC?type=questionView&q_idx=${q_idx}&cPage=${pvo.endPage}" aria-label="Next">
+			            <span aria-hidden="true">&raquo;</span>
+			            <span class="sr-only">Next</span>
+			          </a>
+			       	</li>
+				</c:otherwise>
+			</c:choose>
+		</ul>
+		
 	</div>
 	
 	<%@include file="include/footer.jsp"%>
