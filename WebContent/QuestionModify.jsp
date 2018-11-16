@@ -86,7 +86,9 @@
 
 	
 	
-
+	#write{
+		width: 45px;
+	}
 
 	textarea{
 		resize:none;
@@ -162,7 +164,7 @@
 	<form method="post" name="frm">
 		<table class="table">
 	
-			<h2 class="text-muted text-center"><span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;문의 게시판(수정)</h2>
+			<h2 class="text-muted text-center"><img src="img/write.PNG" id="write">&nbsp;문의 게시판(수정)</h2>
 			<tbody>
 				<tr>
 					<th class="text-center" id="th">제목</th>

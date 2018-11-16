@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<%@include file="include/include-link.jsp" %>
+<%@include file="include/include-style.jsp" %>
 <title>게시글 작성</title>
 <link rel="stylesheet" href="css/bootstrap.css">
 <script>
@@ -26,23 +33,24 @@
 </script>  
 <style>
 
-#content {
-	height: 250px;
-}
 textarea{
 	resize:none;
 }
 .form-group {
         margin-top: 100px;
 }
+#write{
+	width: 45px;
+}
 </style>
 
 </head>
 <body>
+<%@include file="include/header.jsp"%>
 <div class="container text-center">
 <form method="post">
 	<table class="table">
-		<h2 class="text-muted"><span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;문의 게시판(글쓰기)</h2>
+		<h2 class="text-muted"><img src="img/write.PNG" id="write">&nbsp;문의 게시판(글쓰기)</h2>
 		<tbody>
 			<tr>
 				<th >제목</th>
@@ -53,7 +61,7 @@ textarea{
 			<tr>
 				<th >내용</th>
 				<td>
-					<p id="content"><textarea  rows="20" cols="150" name="q_content" title="내용"></textarea></p>
+					<p id="content"><textarea  rows="15" cols="150" name="q_content" title="내용"></textarea></p>
 				</td>
 			</tr>
 			<tr>
@@ -63,10 +71,10 @@ textarea{
 			</tr>						
 			<tr>
 				<td colspan="2">					
-					<input type="button" value="저장" class="btn btn-default"
+					<input type="button" value="저장" class="btn btn-outline-secondary"
 						onclick="sendData()">					
-					<input type="reset" value="다시작성" class="btn btn-default">
-					<input type="button" value="목록" class="btn btn-default"
+					<input type="reset" value="다시작성" class="btn btn-outline-secondary">
+					<input type="button" value="목록" class="btn btn-outline-secondary"
 						onclick="list_go()">
 					<input type="hidden" name="write_chk" value="chk">
 				</td>
@@ -77,8 +85,8 @@ textarea{
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<%@include file="include/footer.jsp"%>
+<%@include file="include/include-js.jsp"%>
 </body>
 </html>
 

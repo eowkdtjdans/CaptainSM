@@ -153,7 +153,7 @@ textarea{
 			<td>작성자 : ${vo.q_id }</td>	
 			<td>				
 				<div class="text-right">
-					<span class="glyphicon glyphicon-time" aria-hidden="true"></span>					
+									
 					${vo.q_date }&nbsp;&nbsp;|
 					<a href="#" onclick="modifyok()">수정 |</a>										
 					<a href="#" onclick="deleteok()">삭제 |</a>				
@@ -184,7 +184,7 @@ textarea{
 	<div class="container">		
 		<c:forEach var="vo" items="${qvo }">				
 				<div>
-					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;${vo.qc_id }
+					&nbsp;${vo.qc_id }
 					<div class="text-right">
 					<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
 					${vo.qc_date }&nbsp;&nbsp;	

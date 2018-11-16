@@ -257,7 +257,7 @@
 			</td>
 			
 			<td>
-				<a href="PSC?type=questionWrite" class="btn btn-outline-secondary"><span class="glyphicon glyphicon-pencil"></span>&nbsp;글쓰기</a>
+				<a href="PSC?type=questionWrite" class="btn btn-outline-secondary">&nbsp;글쓰기</a>
 			</td>
 		</tr>		
 	</tfoot>

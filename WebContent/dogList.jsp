@@ -65,7 +65,7 @@
 	
 	
 	
-	h3 {
+h3 {
 text-align : center;
 font-family: "Sandoll MiSaeng"; 
 font-size : 2.0em;
