@@ -5,20 +5,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.end.command.dog.PetShopCommand;
 import com.end.dao.QuestionDAO;
+import com.end.vo.QcommentVO;
 import com.end.vo.QuestionVO;
 
 public class QuestionModify2Command implements PetShopCommand {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
-		QuestionVO vo = (QuestionVO)request.getSession().getAttribute("vo");
+		String q_idx = request.getParameter("q_idx");
+		String qc_content = request.getParameter("qc_content");
+		String qc_idx = request.getParameter("qc_idx");
 		
-		vo.setQ_subject(request.getParameter("subject"));
-		vo.setQ_content(request.getParameter("content"));
+		QcommentVO qvo = new QcommentVO();
+		qvo.setQc_content(qc_content);  
+		qvo.setQc_idx(Integer.parseInt(qc_idx));
 		
-		QuestionDAO.QuestionUpdate(vo);
+		QuestionDAO.QuestionCommentUpdate(qvo);
 		
-		return "PSC?type=questionView&cPage="+request.getParameter("cPage");
+		return "PSC?type=questionView&q_idx="+q_idx;
 	}
 
 }

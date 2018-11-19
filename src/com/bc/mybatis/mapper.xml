@@ -411,7 +411,7 @@
 	<!-- ===============================문호씨꺼============================= -->
 	<!-- 전체게시글 조회 -->
 	<select parameterType="Map" resultType="com.end.vo.QuestionVO" id="questionList">
-	SELECT R_NUM, Q_IDX, Q_ID, Q_NAME, Q_PHONE,Q_DATE, Q_SUBJECT, Q_CONTENT 
+	SELECT R_NUM, Q_IDX, Q_ID, Q_NAME, Q_PHONE,Q_DATE, Q_SUBJECT, Q_CONTENT, Q_REVIEW_COUNT 
 	FROM (SELECT ROWNUM R_NUM, B.*FROM (SELECT *FROM QUESTION ORDER BY Q_IDX DESC) B)
 	WHERE R_NUM BETWEEN #{begin} AND #{end} 
 	</select>
@@ -423,8 +423,8 @@
 	
 	<!-- 글쓰기 insert -->
 	<insert parameterType="com.end.vo.QuestionVO" id="questionInsert">
-	INSERT INTO QUESTION(Q_IDX, Q_ID, Q_SUBJECT, Q_CONTENT, Q_DATE) 
-	VALUES (QUESTION_SEQ.NEXTVAL, #{q_id}, #{q_subject}, #{q_content}, SYSDATE) </insert>
+	INSERT INTO QUESTION(Q_IDX, Q_ID, Q_SUBJECT, Q_CONTENT, Q_DATE, Q_REVIEW_COUNT) 
+	VALUES (QUESTION_SEQ.NEXTVAL, #{q_id}, #{q_subject}, #{q_content}, SYSDATE, 0) </insert>
 	
 	<!-- 하나의 게시물 조회onelist -->
 	<select resultType="com.end.vo.QuestionVO" id="questionOne">
