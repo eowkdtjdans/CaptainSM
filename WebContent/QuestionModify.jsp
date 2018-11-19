@@ -196,7 +196,7 @@
 	</div> --%>
 	
 	
-<%-- <div class="container">
+<div class="container">
 <div class="row from-group">	
 	<form method="post" name="frm">	
 	<table>		
@@ -249,9 +249,9 @@
 	
 </div>
 </div>		
-	 --%>
 	
-<div class="container">
+	
+<%-- <div class="container">
 	<form method="post" name="frm">
 		<table class="table">
 	
@@ -284,7 +284,7 @@
 			</tbody>
 		</table>
 	</form>
-	</div> 
+	</div>  --%>
 
 
 

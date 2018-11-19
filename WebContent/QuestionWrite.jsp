@@ -47,43 +47,6 @@ textarea{
 </head>
 <body>
 <%@include file="include/header.jsp"%>
-<!-- <div class="container text-center">
-<form method="post">
-	<table class="table">
-		<h2 class="text-muted"><img src="img/write.PNG" id="write">&nbsp;문의 게시판(글쓰기)</h2>
-		<tbody>
-			<tr>
-				<th >제목</th>
-				<td>  <div class="text-right">				
-					<textarea rows="1" cols="150" name="q_subject" title="제목"></textarea>
-				</td>
-			</tr>		
-			<tr>
-				<th >내용</th>
-				<td>
-					<p id="content"><textarea  rows="15" cols="150" name="q_content" title="내용"></textarea></p>
-				</td>
-			</tr>
-			<tr>
-				<td class="text-muted" colspan="2">
-				저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를 받으실 수 있습니다.
-				</td>
-			</tr>						
-			<tr>
-				<td colspan="2">					
-					<input type="button" value="저장" class="btn btn-outline-secondary"
-						onclick="sendData()">					
-					<input type="reset" value="다시작성" class="btn btn-outline-secondary">
-					<input type="button" value="목록" class="btn btn-outline-secondary"
-						onclick="list_go()">
-					<input type="hidden" name="write_chk" value="chk">
-				</td>
-			</tr>		
-		</tbody>
-	</table>
-</form>
-</div> -->
-
 
 <div class="container">
 <div class="row from-group">
