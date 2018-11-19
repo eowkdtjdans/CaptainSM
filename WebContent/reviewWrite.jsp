@@ -3,6 +3,7 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -171,15 +172,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
-            </li>
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
-            </li>
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a> <!-- 일단은 확인용으로 추가해놨어요 요거는 세션을지우는거라서 MVC패턴으로 안해놔서 바로연결-->
-            </li>
+            <c:choose>
+            	<c:when test="${not empty c_id}">
+	            	<li class="nav-item" id="abc">
+		              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
+		            </li>
+		            <li class="nav-item" id="abc">
+		              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a>
+		            </li>
+            	</c:when>
+            	<c:otherwise>
+            		<li class="nav-item" id="abc">
+		              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
+		            </li>
+		            <li class="nav-item" id="abc">
+		              <a class="nav-link" href="CustomerRegister.jsp">회원가입</a>
+		            </li>
+            	</c:otherwise>
+            </c:choose>
             
           </ul>
         </div>
@@ -214,11 +224,10 @@
 
 
 
-
-
 <div class="container">
 <div class="row from-group">
 
+	<p><a href="PSC?type=reviewAll">[목록으로 이동]</a></p>
 	
 	<form method="post" enctype="multipart/form-data">
 	<!-- <form method="post" > -->
@@ -226,7 +235,7 @@
 	<table>
 		
 		<div style="margin:30px">
-		<h2 class="text-muted">&nbsp;후기 게시판(글쓰기)</span></h2>
+		<h2 class="text-muted"><span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;후기 게시판(글쓰기)</span></h2>
 		</div>
 		
 		<thead>
@@ -237,7 +246,8 @@
 		      <div class="input-group-prepend">
 		        <span class="input-group-text">제목</span>
 		      </div>
-				<textarea class="form-control" rows="1" cols="150" name="r_title"></textarea>				
+				<textarea class="form-control" rows="1" cols="150" name="r_title"></textarea>
+				
 		    </div>
 		 	 </td>	
 		  </tr>
@@ -249,7 +259,7 @@
 		      <div class="input-group-prepend">
 		        <span class="input-group-text">내용</span>
 		      </div>
-				<textarea class="form-control" rows="20" cols="150" name="r_content"></textarea>
+				<textarea class="form-control" rows="15" cols="150" name="r_content"></textarea>
 		    </div>
 		    </td>
 		  </tr>
@@ -261,7 +271,7 @@
 		      <div class="input-group-prepend">
 		        <span class="input-group-text">사진첨부</span>
 		      </div>
-				<input class="btn " type="file" name="r_image_l">
+				<input type="file" name="r_image_l">
 				<input type="hidden" name="r_image_l" value="r_image_l">
 		    </div>
 		    </td>
@@ -270,8 +280,8 @@
 			<tr class="text-right">
 				<td colspan="2">
 				
-					<input type="button" value="저장" onclick="sendData()" class="btn btn-default">
-					<input type="reset" value="리셋" class="btn btn-default">
+					<input type="button" value="저장" onclick="sendData()" class="btn btn-outline-secondary">
+					<input type="reset" value="리셋" class="btn btn-outline-secondary">
 					<input type="hidden" name="write_chk" value="chk">
 					<input type="hidden" name="r_id" value="${CustomerVO.getC_id() }">
 					<%-- <input type="hidden" name="r_phone" value="${CustomerVO.getC_phone() }"> --%>

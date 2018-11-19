@@ -30,8 +30,8 @@ public class ReviewAllCommand implements PetShopCommand {
 		cvo.setC_gender("남자");
 		cvo.setC_email("123");*/
 		
-		
 		request.getSession().setAttribute("CustomerVO", cvo);
+		
 		
 		return "reviewAll.jsp";
 	}

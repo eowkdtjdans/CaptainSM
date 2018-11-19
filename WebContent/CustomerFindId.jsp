@@ -41,10 +41,6 @@
 				},
 				error : function(jqXHR, textStatus, errorThrown){
 					console.log(jqXHR.status);
-					alert("실패 : \n"
-						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-						+ "textStatus : " + textStatus + "\n"
-						+ "errorThrown : " + errorThrown);
 				}
 			}); 
 	 }

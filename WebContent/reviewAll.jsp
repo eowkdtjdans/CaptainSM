@@ -174,6 +174,17 @@
 	#fontweight{
 		font-size: 2rem;
 	}
+	#dateimage{
+		margin-left: 160px;
+	}
+	#whodog{
+		width: 440px;
+	} 
+
+	 
+	 th{
+	 	font-size:1.1em;
+	 }
 	.no{ width: 10%}		
 	.subject{ width: 50%}		
 	.id{ width: 15%}		
@@ -201,6 +212,10 @@
 		padding: 3px 3px;
 		font-weight: bold;
 	} 
+	
+	
+
+	
 	
 </style>
 <script>
@@ -233,15 +248,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
-            </li>
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
-            </li>
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a> <!-- 일단은 확인용으로 추가해놨어요 요거는 세션을지우는거라서 MVC패턴으로 안해놔서 바로연결-->
-            </li>
+            <c:choose>
+            	<c:when test="${not empty c_id}">
+	            	<li class="nav-item" id="abc">
+		              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
+		            </li>
+		            <li class="nav-item" id="abc">
+		              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a>
+		            </li>
+            	</c:when>
+            	<c:otherwise>
+            		<li class="nav-item" id="abc">
+		              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
+		            </li>
+		            <li class="nav-item" id="abc">
+		              <a class="nav-link" href="CustomerRegister.jsp">회원가입</a>
+		            </li>
+            	</c:otherwise>
+            </c:choose>
             
           </ul>
         </div>
@@ -280,14 +304,14 @@
 
 <div class="container">
 
-	<p><input type="button" value="글쓰기" onclick="write_go()" class="btn btn-default"></p>
 	<hr>
 	<form method="post" enctype="multipart/form-data">
 	<table class="table table-hover">
-	<!-- <h3 class="page-header">후기 게시판</h3> -->
+
+		
 		<thead>
 			<tr class="title">
-				<th class="no">번호</th>	
+				<th class="no">No</th>	
 				<th class="subject">제목</th>
 				<th class="id">아이디</th>
 				<th class="date">작성일자</th>
@@ -317,7 +341,7 @@
 		
 		<tfoot>
 			<tr>
-				<td colspan="5">
+				<td colspan="4">
 					
 					<ul class="paging">
 					
@@ -326,12 +350,12 @@
 								<c:when test="${b == pvo.getNowBlock() }">
 									<c:choose>
 										<c:when test="${pvo.getNowBlock() == 1  }" >
-											<li class="disable">이전</li>
+											<li class="disable">◀</li>
 										
 										</c:when>
 										<c:otherwise>
 											<li>
-												<a href="PSC?type=reviewAll&cPage=${pvo.getfPageNumAtBlock() - 1 }">이전</a>											
+												<a href="PSC?type=reviewAll&cPage=${pvo.getfPageNumAtBlock() - 1 }">◀</a>											
 											</li>
 										</c:otherwise>
 										
@@ -367,12 +391,13 @@
 									
 									<c:when test="${pvo.getNowBlock() == pvo.getTotalBlock() }">
 										<li class="disable" float:right;>
-											다음
+											▶
 										</li>
 									</c:when>
 									<c:otherwise>
 										<li float:right;>
-											<a href="PSC?type=reviewAll&cPage=${pvo.getlPageNumAtBlock() + 1 }&plus=${pvo.getNowBlock()  }">다음</a>
+											<a href="PSC?type=reviewAll&cPage=${pvo.getlPageNumAtBlock() + 1 }&plus=${pvo.getNowBlock()  }">▶</a>
+											
 										</li>
 									</c:otherwise>
 									
@@ -381,18 +406,21 @@
 							
 						</c:choose>
 					</c:forEach>
-					
+	
 					</ul>
 					
 				</td>
+				<td><input type="button" value="글쓰기" onclick="write_go()" class="btn btn-outline-secondary"></td>
 			</tr>
+			
+			
 		</tfoot>
 	
 	</table>
 	</form>
-
+	
 </div>
-
+			
 
 </body>
 </html>
