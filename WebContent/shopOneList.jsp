@@ -24,6 +24,7 @@
 
     <!-- Custom styles for this template -->
     <link href="startbootstrap-portfolio-item-gh-pages/css/portfolio-item.css" rel="stylesheet">
+    <%@include file="include/include-style.jsp" %>
     
 <script>
 	function detail(frm) {
@@ -34,6 +35,8 @@
 
 </head>
 <body>
+	<%@include file="include/header.jsp" %>
+
 	<!-- Page Content -->
     <div class="container">
 
