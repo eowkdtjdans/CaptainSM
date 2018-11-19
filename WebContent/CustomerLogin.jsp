@@ -8,49 +8,54 @@
 <title>로그인</title>
 <%@include file="include/include-link.jsp" %>
 <%@include file="include/include-style.jsp" %>
-<!-- jQuery 설정-->
+	
 	
 <script>
-		 function login_go(frm) {
-			var c_id = frm.c_id.value;
-			var c_pwd = frm.c_pwd.value;
-			if (c_id  == "") {
-				alert("ID를 입력하세요");
-				frm.c_id.focus();
-				return false;
-			}else if (c_pwd == "") {
-				alert("비밀번호를 입력하세요");
-				frm.c_pwd.focus();
-				return false;
-			} else if (frm.c_id.value == "admin") {
-				frm.action = "PSC?type=CustomerAdmin";
-				frm.submit();
-				return false;
-			}
-					 $.ajax({
-					type : "get",
-					url : "PSC?type=JSONloginCheck",
-					dataType : "json",
-					success : function(result) {
-						var alist = result.list;
-						$.each(alist, function(CustomerVO) {
-							if(c_id == this.c_id && c_pwd == this.c_pwd) {
-								frm.action = "PSC?type=CustomerLogin";
-								frm.submit();
-								return false;
-							} else {
-								alert("잘못 입력하셨습니다.");
-								return false;
-							}
-						});
-					},
-					error : function(jqXHR, textStatus, errorThrown){
-						console.log(jqXHR.status);
+function login_go(frm) {
+	var c_id = frm.c_id.value;
+	var c_pwd = frm.c_pwd.value;
+	if (c_id  == "") {
+		alert("아이디를 입력하세요.");
+		frm.c_id.focus();
+		return false;
+	}
+	if (c_pwd == "") {
+		alert("비밀번호를 입력하세요.");
+		frm.c_pwd.focus();
+		return false;
+	} 
+	
+	if (c_id == "admin") {
+		frm.action = "AdminMain.jsp";
+		frm.submit();
+		return false;
+	}
+			 $.ajax({
+			type : "get",
+			url : "PSC?type=JSONloginCheck",
+			dataType : "json",
+			success : function(result) {
+				var alist = result.list;
+				$.each(alist, function(CustomerVO) {
+					if(c_id == this.c_id && c_pwd == this.c_pwd) {
+						alert("로그인 성공 ");
+						 frm.action = "PSC?type=CustomerLogin";
+						 frm.submit(); 
+						 return false;
 					}
-				}); 
-				
-		 }
-	</script> 
+				});
+			},
+			error : function(jqXHR, textStatus, errorThrown){
+				console.log(jqXHR.status);
+				alert("실패 : \n"
+					+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
+					+ "textStatus : " + textStatus + "\n"
+					+ "errorThrown : " + errorThrown);
+			}
+		}); 
+		
+ }
+</script>	
 	
 <style>
 h3 {
@@ -61,21 +66,17 @@ h3 {
 	margin-left : -1em;
 	margin-bottom : 5em;
 	color : #964b00;
-
 }
-
 h3:before {
 	content : "●";
 	font-size : 1.2em;
 	vertical-align : 110%;
 }
-
 h3:after {
 	content : "●";
 	font-size : 0.7em;
 	vertical-align : -140%;
 }
-
 .left_m{
 	margin-left : 1.5em;
 }
@@ -99,11 +100,11 @@ h3:after {
 		</thead>
 		<tbody>
 	<tr>
-   		 <td>ID&emsp;&nbsp;&nbsp;<input type="text" id="c_id" name="c_id" placeholder="아이디" style="width:200px"/><br/></td>
+   		 <td>ID&emsp;&nbsp;&nbsp;<input type="text" id="c_id" name="c_id" oninput="check(this.form)" placeholder="아이디" style="width:200px"/><br/></td>
     </tr>
 	
 	<tr>   
-     	<td>PWD&nbsp;&nbsp;<input type="password" id="c_pwd" name="c_pwd" placeholder="패스워드" style="width:200px"/><br/></td>
+     	<td>PWD&nbsp;&nbsp;<input type="password" id="c_pwd" name="c_pwd" oninput="check(this.form)" placeholder="패스워드" style="width:200px"/><br/></td>
    		
     </tr>
     
@@ -134,6 +135,7 @@ h3:after {
 </body>
 
 </html>
+
 
 
 

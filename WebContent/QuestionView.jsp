@@ -91,7 +91,7 @@ textarea{
 	padding-bottom: 0px;
 }
 
-div a {
+#atag-size {
 	font-size: small;
 	text-decoration: none;
 	color: black;
@@ -156,8 +156,8 @@ div a:hover {
 					${vo.qc_date }
 				</span>
 				<c:if test="${vo.qc_id eq c_id }">
-					|<a href="#" onclick="modifyokC('${vo.qc_idx}')">&nbsp;수정&nbsp;</a>|
-					<a href="#" onclick="deleteokC('${vo.qc_idx}')">&nbsp;삭제&nbsp;</a>|
+					|<a id="atag-size" href="#" onclick="modifyokC('${vo.qc_idx}')">&nbsp;수정&nbsp;</a>|
+					<a id="atag-size" href="#" onclick="deleteokC('${vo.qc_idx}')">&nbsp;삭제&nbsp;</a>|
 				</c:if>
 			</div>									
 			<div class="qcContent">&nbsp;${vo.qc_content }</div>

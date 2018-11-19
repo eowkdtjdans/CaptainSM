@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.end.command.dog.PetShopCommand;
 import com.end.dao.QuestionDAO;
@@ -57,9 +58,7 @@ public class QuestionViewCommand implements PetShopCommand {
 		System.out.println("qvo: " + qvo);
 	
 		int hit = QuestionDAO.QuestionCommentCount(q_idx);
-		
-		QuestionDAO.QuestionCountUp(q_idx);
-		
+				
 		request.getSession().setAttribute("qvo", qvo);
 		request.getSession().setAttribute("vo", vo);
 		request.getSession().setAttribute("hit", hit);
@@ -68,7 +67,15 @@ public class QuestionViewCommand implements PetShopCommand {
 		request.setAttribute("q_idx", q_idx);
 		request.setAttribute("pvo", pvo);
 		
+		QuestionDAO.QuestionCountUp(q_idx);
+
+		
 		return "QuestionView.jsp";
+		
+		
+		
+		
+		
 		
 	}
 

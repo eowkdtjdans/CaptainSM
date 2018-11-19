@@ -159,7 +159,7 @@
 
 
 
-	<br><hr><br>
+	<%-- <br><hr><br>
 	<div class="container">
 	<form method="post" name="frm">
 		<table class="table">
@@ -193,27 +193,109 @@
 			</tbody>
 		</table>
 	</form>
-	</div>
+	</div> --%>
 	
 	
+<%-- <div class="container">
+<div class="row from-group">	
+	<form method="post" name="frm">	
+	<table>		
+		<div style="margin:30px">
+		<h2 class="text-muted text-center"><img src="img/write.PNG" id="write">&nbsp;문의 게시판(수정)</h2>
+		</div>		
+		<thead>		
+		  <tr>
+		 	 <td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">제목</span>
+		      </div>
+				<textarea class="form-control" rows="1" cols="150" name="subject">${vo.q_subject }</textarea>				
+		    </div>
+		 	 </td>	
+		  </tr>
+		  
+		  
+	 	  <tr>
+		 	<td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">내용</span>
+		      </div>
+				<textarea class="form-control" rows="15" cols="150" name="content">${vo.q_content }</textarea>
+		    </div>
+		    </td>
+		  </tr>
+		  
+		  
+		 <tr>
+			<td class="text-muted text-center" colspan="2">
+				저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를 받으실 수 있습니다.
+			</td>
+		 </tr>
+		 
+		 <tr>
+			<td colspan="2" class="text-center"> 
+				<input type="button" class="btn btn-outline-secondary" value="수정완료" onclick="modify_go(this.form)">
+				<input type="hidden" name="q_idx" value="${vo.q_idx}">				
+				<input type="hidden" name="cPage" value="${cPage}">				
+			</td>
+		 </tr>	  
+			
+			
+		</thead>		
+	</table>	
+	</form>
 	
+</div>
+</div>		
+	 --%>
 	
-	
-	
-<!-- <div class="container">
+<div class="container">
 	<form method="post" name="frm">
-		<table class="table table-hover" id="table2">
-			<tr>
-				<th>제목</th>
-				<td>
-					<textarea rows="1" cols="30">asdfffffffffffffffffffffffffffff</textarea>
-				</td>
-			</tr>
+		<table class="table">
+	
+			<h2 class="text-muted text-center"><img src="img/write.PNG" id="write">&nbsp;문의 게시판(수정)</h2>
+			<tbody>
+				<tr>
+					<th class="text-center" id="th">제목</th>
+					<td>					
+						<textarea rows="1" cols="50" name="subject">${vo.q_subject }</textarea>																								
+					</td>					
+				</tr>
+				<tr>
+					<th class="text-center" id="th">내용</th>
+					<td>
+						<p id="content"><textarea name="content" rows="15" cols="150">${vo.q_content }</textarea></p>
+					</td>
+				</tr>
+				<tr>
+					<td class="text-muted text-center" colspan="2">
+					저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를 받으실 수 있습니다.
+					</td>
+				</tr>	
+				<tr>
+					<td colspan="2" class="text-center"> 
+						<input type="button" class="btn btn-outline-secondary" value="수정완료" onclick="modify_go(this.form)">
+						<input type="hidden" name="q_idx" value="${vo.q_idx}">				
+						<input type="hidden" name="cPage" value="${cPage}">				
+					</td>
+				</tr>				
+			</tbody>
 		</table>
 	</form>
-</div> -->
-	
-	
+	</div> 
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	

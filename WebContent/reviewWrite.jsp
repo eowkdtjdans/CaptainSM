@@ -214,10 +214,11 @@
 
 
 
+
+
 <div class="container">
 <div class="row from-group">
 
-	<p><a href="PSC?type=reviewAll">[목록으로 이동]</a></p>
 	
 	<form method="post" enctype="multipart/form-data">
 	<!-- <form method="post" > -->
@@ -225,7 +226,7 @@
 	<table>
 		
 		<div style="margin:30px">
-		<h2 class="text-muted"><span class="glyphicon glyphicon-pencil" aria-hidden="true">&nbsp;후기 게시판(글쓰기)</span></h2>
+		<h2 class="text-muted">&nbsp;후기 게시판(글쓰기)</span></h2>
 		</div>
 		
 		<thead>
@@ -236,8 +237,7 @@
 		      <div class="input-group-prepend">
 		        <span class="input-group-text">제목</span>
 		      </div>
-				<textarea class="form-control" rows="1" cols="150" name="r_title"></textarea>
-				
+				<textarea class="form-control" rows="1" cols="150" name="r_title"></textarea>				
 		    </div>
 		 	 </td>	
 		  </tr>
@@ -261,7 +261,7 @@
 		      <div class="input-group-prepend">
 		        <span class="input-group-text">사진첨부</span>
 		      </div>
-				<input type="file" name="r_image_l">
+				<input class="btn " type="file" name="r_image_l">
 				<input type="hidden" name="r_image_l" value="r_image_l">
 		    </div>
 		    </td>

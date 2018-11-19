@@ -18,8 +18,7 @@
 			alert("이름을 입력하세요");
 			frm.c_name.focus();
 			return false;
-		}
-		if (c_phone == "") {
+		} else if (c_phone == "") {
 			alert("핸드폰 번호를 입력하세요");
 			frm.c_pwd.focus();
 			return false;
@@ -32,6 +31,7 @@
 					var alist = result.list;
 					$.each(alist, function(CustomerVO) {
 						if(c_name == this.c_name && c_phone == this.c_phone) {
+							alert("아이디 : " + this.c_id);
 							frm.action = "PSC?type=CustomerFindId";
 							frm.submit(); 
 							return false;
@@ -118,10 +118,15 @@ margin-left : 1.5em;
     
     
 			<td style="text-algin: left" colspan="3">
-			<input class="btn btn-outline-secondary pull-right" type="submit"value="아이디 찾기" id="login" onclick="find_id(this.form)"/>
 			
+			 <input class="btn btn-outline-secondary" type="button" value="비밀번호 찾기"
+			 onclick="location.href='CustomerFindPwd.jsp'"/>
 			<input class="btn btn-outline-secondary" type="button" value="회원가입"
 			 onclick="location.href='CustomerRegister.jsp'"/>
+			
+			 <input class="btn btn-outline-info pull-right" type="submit"value="아이디 찾기" id="login" onclick="find_id(this.form)"/>
+			 <input class="btn btn-outline-secondary pull-right" type="button" value="로그인"
+			 onclick="location.href='CustomerLogin.jsp'"/>
 			<input class="btn btn-outline-secondary" type="button" value="메인화면"
 			 onclick="location.href='Home.jsp'"/>
 			<input type="hidden" name="find_idchk" value="chk"/>

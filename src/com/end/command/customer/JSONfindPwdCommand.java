@@ -19,6 +19,7 @@ public class JSONfindPwdCommand implements PetShopCommand {
 		for (CustomerVO vo : list) {
 			result += "{";
 			result += "\"c_id\" : \"" + vo.getC_id() + "\",";
+			result += "\"c_pwd\" : \"" + vo.getC_pwd() + "\",";
 			result += "\"c_phone\" : \"" + vo.getC_phone() + "\"";
 			result += "},";
 		}
