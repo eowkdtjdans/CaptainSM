@@ -21,7 +21,7 @@ public class QuestionModify2Command implements PetShopCommand {
 		qvo.setQc_idx(Integer.parseInt(qc_idx));
 		
 		QuestionDAO.QuestionCommentUpdate(qvo);
-		
+		 
 		return "PSC?type=questionView&q_idx="+q_idx;
 	}
 

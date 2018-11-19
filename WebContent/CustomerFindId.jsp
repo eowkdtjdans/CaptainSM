@@ -11,46 +11,50 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script>
-		 function find_id(frm) {
-			var c_name = frm.c_name.value;
-			var c_phone = frm.c_phone.value;
-			if (c_name  == "") {
-				alert("이름을 입력하세요");
-				frm.c_name.focus();
-				return false;
-			}
-			if (c_phone == "") {
-				alert("핸드폰 번호를 입력하세요");
-				frm.c_pwd.focus();
-				return false;
-			} 
-					 $.ajax({
-					type : "get",
-					url : "PSC?type=JSONFindIDCheck",
-					dataType : "json",
-					success : function(result) {
-						var alist = result.list;
-						$.each(alist, function(CustomerVO) {
-							if(c_name == this.c_name && c_phone == this.c_phone) {
-								alert("데이터 있음");
-								//$('#"findId"').html('<p style="blue">당신의 아이디는 : ${c_id}</p>');
-								 frm.action = "PSC?type=CustomerFindId";								 
-								 frm.submit(); 
-								 return false;
-							}
-						});
-					},
-					error : function(jqXHR, textStatus, errorThrown){
-						console.log(jqXHR.status);
-						alert("실패 : \n"
-							+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
-							+ "textStatus : " + textStatus + "\n"
-							+ "errorThrown : " + errorThrown);
-					}
-				}); 
-				
-		 }
-	</script> 
+	 function find_id(frm) {
+		var c_name = frm.c_name.value;
+		var c_phone = frm.c_phone.value;
+		if (c_name  == "") {
+			alert("이름을 입력하세요");
+			frm.c_name.focus();
+			return false;
+		} else if (c_phone == "") {
+			alert("핸드폰 번호를 입력하세요");
+			frm.c_pwd.focus();
+			return false;
+		} 
+				 $.ajax({
+				type : "get",
+				url : "PSC?type=JSONFindIDCheck",
+				dataType : "json",
+				success : function(result) {
+					var alist = result.list;
+					$.each(alist, function(CustomerVO) {
+						if(c_name == this.c_name && c_phone == this.c_phone) {
+							alert("아이디 : " + this.c_id);
+							frm.action = "PSC?type=CustomerFindId";
+							frm.submit(); 
+							return false;
+						}
+						
+					});
+				},
+				error : function(jqXHR, textStatus, errorThrown){
+					console.log(jqXHR.status);
+					alert("실패 : \n"
+						+ "jqXHR.readyState : " + jqXHR.readyState + "\n"
+						+ "textStatus : " + textStatus + "\n"
+						+ "errorThrown : " + errorThrown);
+				}
+			}); 
+	 }
+	 
+	 function win() {
+		 var setting = 'toolbar=no, status=no, menubar=no, scrollbars=no, height=300, width=300, resizable=no';
+		 var target = 'showId.jsp';
+		 window.open(target, 'showId', setting);
+	 }
+</script> 
 	
 <style>
 h3 {
@@ -114,10 +118,15 @@ margin-left : 1.5em;
     
     
 			<td style="text-algin: left" colspan="3">
-			<input class="btn btn-outline-secondary pull-right" type="submit"value="아이디 찾기" id="login" onclick="find_id(this.form)"/>
 			
+			 <input class="btn btn-outline-secondary" type="button" value="비밀번호 찾기"
+			 onclick="location.href='CustomerFindPwd.jsp'"/>
 			<input class="btn btn-outline-secondary" type="button" value="회원가입"
 			 onclick="location.href='CustomerRegister.jsp'"/>
+			
+			 <input class="btn btn-outline-info pull-right" type="submit"value="아이디 찾기" id="login" onclick="find_id(this.form)"/>
+			 <input class="btn btn-outline-secondary pull-right" type="button" value="로그인"
+			 onclick="location.href='CustomerLogin.jsp'"/>
 			<input class="btn btn-outline-secondary" type="button" value="메인화면"
 			 onclick="location.href='Home.jsp'"/>
 			<input type="hidden" name="find_idchk" value="chk"/>

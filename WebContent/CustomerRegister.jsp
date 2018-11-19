@@ -65,7 +65,13 @@
 			frm.c_email.focus();
 			frm.c_email.value = "";
 			return false;
-		}
+		} if (frm.c_pwd.value.length<=4) {
+			  $('#checkPwd').html('<p style="color:black">비밀번호가 너무 짧습니다. 더 길게 설정하세요.</p>');
+			  alert("비밀번호가 너무 짧습니다. 다시 설정해주세요.");
+			  frm.c_pwd.focus();
+				frm.c_pwd.value = "";
+			  return false;
+		  }
 		
 		frm.action = "PSC?type=CustomerRegister";
 		frm.submit();
@@ -129,12 +135,16 @@
 			  frm.c_pwd2.value="";
 			  frm.c_pwd.focus();
 			  return false;
-		  } if (frm.c_pwd.value.length>=12) {
-				 alert("비밀번호를 12자이하까지 입력해주세요.");
+		  } if (frm.c_pwd.value.length>=16) {
+				 alert("비밀번호를 16자이하까지 설정 가능합니다..");
 					 frm.c_pwd.focus();
 	                frm.c_pwd.value="";
 		            return false;
-		        }
+		  } if (frm.c_pwd.value.length<=4) {
+			  $('#checkPwd').html('<p style="color:black">비밀번호가 너무 짧습니다. 더 길게 설정하세요.</p>');
+	            return false;
+		  }
+		 	
 		  if (pwd == pwd2) {
 				alert("암호 일치");
 				$('#checkPwd').html('<p style="color:blue">비밀번호가 일치합니다.</p>');

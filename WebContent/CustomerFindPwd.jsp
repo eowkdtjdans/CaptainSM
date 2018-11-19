@@ -32,14 +32,10 @@
 						var alist = result.list;
 						$.each(alist, function(CustomerVO) {
 							if(c_id == this.c_id && c_phone == this.c_phone) {
-								alert("데이터 있음");
-								//$('#"findId"').html('<p style="blue">당신의 아이디는 : ${c_id}</p>');
+								alert("비밀번호 : " + this.c_pwd);
 								 frm.action = "PSC?type=CustomerFindPwd";
 								 frm.submit(); 
 								 return false;
-							} else {
-								alert("데이터가 존재하지 않습니다.");
-								return false;
 							}
 						});
 					},
@@ -117,12 +113,17 @@ margin-left : 1.5em;
     
     
 			<td style="text-algin: left" colspan="3">
-			<input class="btn btn-outline-secondary pull-right" type="submit"value="비밀번호 찾기" id="login" onclick="find_pwd(this.form)"/>
 			
+			  <input class="btn btn-outline-secondary" type="button" value="아이디 찾기"
+			 onclick="location.href='CustomerFindId.jsp'"/>
 			<input class="btn btn-outline-secondary pull-right" type="button" value="회원가입"
 			 onclick="location.href='CustomerRegister.jsp'"/>
+			 <input class="btn btn-outline-info pull-right" type="submit"value="비밀번호 찾기" id="login" onclick="find_pwd(this.form)"/>
+			 <input class="btn btn-outline-secondary pull-right" type="button" value="로그인"
+			 onclick="location.href='CustomerLogin.jsp'"/>
 			<input class="btn btn-outline-secondary pull-right" type="button" value="메인화면"
 			 onclick="location.href='Home.jsp'"/>
+			
 			<input type="hidden" name="find_pwdchk" value="chk"/>
 			</td>
 	</tr>
