@@ -127,16 +127,36 @@ pageEncoding="utf-8"%>
     
     <!-- Page Content -->
     <div class="container">
-      <div class="row">		
+            <div class="row">      
         <div class="col-lg-3">
           <h1 class="my-4"><img src="img/paw.PNG" id="paw">&nbsp;Happy dog</h1>
+          
           <div class="list-group">
             <a href="PSC?type=dogList&cPage=1" class="list-group-item">분양</a>
             <a href="PSC?type=questionList" class="list-group-item">문의 게시판</a>
             <a href="PSC?type=reviewAll" class="list-group-item">후기 게시판</a>
-            <a href="PSC?type=menu" class="list-group-item">애견용품</a>
+            
+           <div id="accordion" >
+              <div class="list-group">
+             
+                    <a class="list-group-item" data-toggle="collapse" href="#collapseOne">
+                      애견용품
+                    </a>
+               
+                 <div id="collapseOne" class="collapse" data-parent="#accordion" >
+                
+                 <div class="list-group" >
+                  <a class="list-group-item" href="PSC?type=List&category=food">사료</a>
+                  <a class="list-group-item" href="PSC?type=List&category=toy">장난감</a>
+                  <a class="list-group-item" href="PSC?type=List&category=house">하우스</a>
+                  <a class="list-group-item" href="PSC?type=cart_view">장바구니</a>
+                 </div>
+               </div>
+         </div>
+       </div>
             <a href="#" class="list-group-item">애견 선택 요령</a>
           </div>
+          
         </div>
 
         <div class="col-lg-9">

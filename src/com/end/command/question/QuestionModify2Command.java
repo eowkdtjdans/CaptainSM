@@ -20,5 +20,9 @@ public class QuestionModify2Command implements PetShopCommand {
       
       return "PSC?type=questionView&cPage=1";
    }
+<<<<<<< HEAD
 //+request.getParameter("cPage");
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/eowkdtjdans/CaptainSM.git

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,15 +149,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
-            </li>
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
-            </li>
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a> <!-- 일단은 확인용으로 추가해놨어요 요거는 세션을지우는거라서 MVC패턴으로 안해놔서 바로연결-->
-            </li>
+            <c:choose>
+            	<c:when test="${not empty c_id}">
+	            	<li class="nav-item" id="abc">
+		              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
+		            </li>
+		            <li class="nav-item" id="abc">
+		              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a>
+		            </li>
+            	</c:when>
+            	<c:otherwise>
+            		<li class="nav-item" id="abc">
+		              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
+		            </li>
+		            <li class="nav-item" id="abc">
+		              <a class="nav-link" href="CustomerRegister.jsp">회원가입</a>
+		            </li>
+            	</c:otherwise>
+            </c:choose>
             
           </ul>
         </div>
@@ -256,7 +266,7 @@
 			<tr >
 				<td>
 					<div class="text-right">
-					<span><input type="button" value="수정" onclick="update_on(this.form)" class="btn btn-primary"></span>		
+					<span><input type="button" value="수정" onclick="update_on(this.form)" class="btn btn-outline-secondary"></span>		
 					</div>
 				</td>
 			</tr>

@@ -44,7 +44,12 @@
 	}
 	
 	.pass {
-		size: 10;
+		size: 10;	
+	}
+	
+	#pass{
+		border:0;
+		outline:0;
 	}
 	
 	#content {
@@ -105,9 +110,30 @@
 	.subject{ width: 50%}		
 	.id{ width: 15%}		
 	.date{ width: 15%}		
-	.count_num{ width: 10%}	
-
+	.count_num{ width: 10%}
+		
+	#qcDate {
+		font-size: small;
+	}
 	
+	#qc {
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+	
+	#atag-size {
+		font-size: small;
+		text-decoration: none;
+		color: black;
+	}
+	
+#click {
+	vertical-align: top;
+	width: 88px;
+	height: 78px;
+}
 </style>
 <script>
 
@@ -170,6 +196,14 @@
 		history.go(-1);
 	}
 	
+	function deleteokC(rc_idx) {
+		if (confirm("정말 삭제하시겠습니까?")) {
+			location.href = "PSC?type=reviewDeleteC&rc_idx=" + rc_idx + "&r_idx=${ReviewDataVO.getR_idx() }";
+		} else {
+			histogy.go(-2);
+		}
+	}
+	
 </script>
 </head>
 <body>
@@ -184,15 +218,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
-            </li>
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
-            </li>
-            <li class="nav-item" id="abc">
-              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a> <!-- 일단은 확인용으로 추가해놨어요 요거는 세션을지우는거라서 MVC패턴으로 안해놔서 바로연결-->
-            </li>
+            <c:choose>
+            	<c:when test="${not empty c_id}">
+	            	<li class="nav-item" id="abc">
+		              <a class="nav-link" href="PSC?type=orderList">My주문조회</a>
+		            </li>
+		            <li class="nav-item" id="abc">
+		              <a class="nav-link" href="CustomerLogout.jsp">로그아웃</a>
+		            </li>
+            	</c:when>
+            	<c:otherwise>
+            		<li class="nav-item" id="abc">
+		              <a class="nav-link" href="PSC?type=CustomerLogin">로그인</a>
+		            </li>
+		            <li class="nav-item" id="abc">
+		              <a class="nav-link" href="CustomerRegister.jsp">회원가입</a>
+		            </li>
+            	</c:otherwise>
+            </c:choose>
             
           </ul>
         </div>
@@ -255,9 +298,13 @@
 						
 						<c:choose>
 						<c:when test="${CustomerVO.getC_id() == ReviewDataVO.getR_id() }">
-						<input type="button" value="글수정" onclick="check_cus(this, 'upda')" class="btn btn-primary" id="pass">&nbsp;&nbsp;|
+						<input type="button" value="글수정" onclick="check_cus(this, 'upda')" class="btn-outline-light text-dark" id="pass">&nbsp;|
+						
+						<!-- <a href="#" onclick="check_cus(this, 'upda')" id="pass">글수정</a>&nbsp;| -->
 							
-						<input type="button" value="글삭제" onclick="check_cus(this, 'del')" class="btn btn-default">&nbsp;&nbsp;|						
+						<!-- <input type="button" value="글삭제" onclick="check_cus(this, 'del')" class="btn btn-default">&nbsp;&nbsp;|	 -->
+						<a href="#" onclick="check_cus(this, 'del')" >&nbsp;글삭제&nbsp;</a>&nbsp;|		
+										
 						</c:when>
 						</c:choose>
 					</div>		
@@ -291,46 +338,61 @@
 	
 	
 	<!-- 댓글 출력폼 -->
+			<form>
 		<div class="container">
 		<hr>
 		<c:forEach var="voC" items="${listC }">				
-				&nbsp;${voC.getRc_id() }
-				<div class="text-right">${voC.getRc_date().substring(0, 10) }			
+			<div>
+				&nbsp;<strong>${voC.getRc_id() }</strong>
+				<span>
+					${voC.getRc_date().substring(0, 10) }			
+				</span>
 					<c:choose>
 					<c:when test="${CustomerVO.getC_id() == voC.getRc_id() }">
-					<input type="button" value="삭제" onclick="c_delete_go(this.form)" class="btn btn-default">
+					<a id="atag-size" href="#" onclick="deleteokC('${voC.getRc_idx() }', '${ReviewDataVO.getR_idx() }')">&nbsp;삭제&nbsp;</a>
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>
 					</c:choose>									
-				</div>								
+			</div>								
 				<div>
 					${voC.getRc_content() }
 				</div>	
 				<hr><hr>		
-				<input type="hidden" name="rc_idx" value="${voC.getRc_idx() }">
 				<input type="hidden" name="r_idx" value="${ReviewDataVO.getR_idx() }">
+				<input type="hidden" name="rc_idx" value="${voC.getRc_idx() }">
+<%-- 				<input type="hidden" name="r_idx" value="${ReviewDataVO.getR_idx() }"> --%>
 				<input type="hidden" name="DBid" value="${voC.getRc_id() }" id="DBid">
 		</c:forEach>
 		</div>
+			</form>
 
 
+	<c:choose>
+	<c:when test="${not empty CustomerVO.getC_id() }">
 	<!-- 댓글 입력폼 -->
 	<div class="container">
-	<div class="row">
+	<!-- <div class="row"> -->
 	<form method="post">
 		
-			<p>글번호: <input type="text" name="r_idx" value="${ReviewDataVO.getR_idx() }" readonly></p>
-			<p>아이디: <input type="text" name="rc_id" value="${CustomerVO.getC_id() }" readonly></p>
+			<%-- <p>글번호: <input type="text" name="r_idx" value="${ReviewDataVO.getR_idx() }" readonly></p>
+			<p>아이디: <input type="text" name="rc_id" value="${CustomerVO.getC_id() }" readonly></p> --%>
 	  
-			<p><textarea name="rc_content" rows="3" cols="130"></textarea></p>
+			<p>
+			<textarea name="rc_content" rows="3" cols="130"></textarea>
+			<input type="button" value="댓글작성" onclick="c_write_go(this.form)" class="btn btn-outline-secondary" id="click">
+			
+			</p>
 		
-		<input type="button" value="댓글작성" onclick="c_write_go(this.form)" class="btn btn-default">
 		<input type="hidden" name="r_idx" value="${ReviewDataVO.getR_idx() }">
 		
 	</form>
+	<!-- </div> -->
 	</div>
-	</div>
+	</c:when>
+	<c:otherwise>
+	</c:otherwise>
+	</c:choose>
 
 	
 </div>

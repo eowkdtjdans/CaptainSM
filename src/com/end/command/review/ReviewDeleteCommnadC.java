@@ -11,6 +11,10 @@ public class ReviewDeleteCommnadC implements PetShopCommand {
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		
+		System.out.println("request.getParameter(\"rc_idx\") : " + request.getParameter("rc_idx"));
+		System.out.println("request.getParameter(\"r_idx\") : " + request.getParameter("r_idx"));
+		
+		
 		String rc_idx = request.getParameter("rc_idx");
 		String r_idx = request.getParameter("r_idx");
 		String navi = r_idx;

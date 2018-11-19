@@ -100,29 +100,25 @@
       </div>
     </nav>
 
-    <!-- Page Content -->
+       <!-- Page Content -->
     <div class="container">
       <div class="row">
-		
         <div class="col-lg-3">
-          <h1 class="my-4"><img src="img/paw.PNG" id="paw">&nbsp;Happy dog</h1>
+          <h1 class="my-4">&nbsp;Happy dog</h1>
           <div class="list-group">
-            <a href="PSC?type=dogList&cPage=1" class="list-group-item">분양</a>
-            <a href="PSC?type=questionList" class="list-group-item">문의 게시판</a>
-            <a href="PSC?type=reviewAll" class="list-group-item">후기 게시판</a>
-            <a href="PSC?type=menu" class="list-group-item">애견용품</a>
-            <a href="#" class="list-group-item">애견 선택 요령</a>
+         <a class="list-group-item" href="PSC?type=List&category=food">사료</a>
+         <a class="list-group-item" href="PSC?type=List&category=toy">장난감</a>
+         <a class="list-group-item" href="PSC?type=List&category=house">하우스</a>
+         <a class="list-group-item" href="PSC?type=cart_view">장바구니</a>
           </div>
         </div>
-
         <div class="col-lg-9">
           <div class="card mt-4">
             <img class="card-img-top img-fluid" src="img/dogwallpaper5.jpg">
           </div>
         </div>
-        
       </div>
-    </div>   
+    </div>  
 
 <div class="container">
 

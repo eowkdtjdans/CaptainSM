@@ -24,15 +24,36 @@
 <body>
 	<%@include file="include/header.jsp"%>
 
+	<div class="container">
+	<div class="row from-group">
 	<div class="write">
+		
 		<form method="post" enctype="multipart/form-data">
-			<ul>
-				<li>
-					제목: <input type="text" name="d_title">
-				</li>
-				<li>
-					견종: 
-					<select size="1" name="d_type">
+		<table>		
+		<div style="margin:30px">
+		<h2 class="text-muted"><img src="img/write.PNG" id="write">&nbsp;분양 게시판(글쓰기)</h2>
+		</div>
+		
+		<thead>
+		
+		  <tr>
+		 	 <td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">제목</span>
+		      </div>
+				<textarea class="form-control" rows="1" cols="150" name="d_title"></textarea>				
+		    </div>
+		 	 </td>	
+		  </tr>
+		  
+		  <tr>
+		 	<td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">견종</span>
+		      </div>
+				<select size="1" name="d_type">
 						<option selected>포메라니안</option>
 						<option>폼피츠</option>
 						<option>말티즈</option>
@@ -57,45 +78,122 @@
 						<option>빠삐용</option>
 						<option>샤페이</option>
 						<option>김성문</option>
+						<option>믹스견</option>
 						<option>기타</option>
 					</select>
-				</li>
-				<li>
-					모색: <input type="text" name="d_fur">
-				</li>
-				<li>
-					이름: <input type="text" name="d_name">
-				</li>
-				<li>
-					나이: <input type="text" name="d_age">
-				</li>
-				<li>
-					크기:
-						<select size="1" name="d_size">
-							<option selected>T-CUP</option>
-							<option>SMALL</option>
-							<option>MEDIUM</option>
-							<option>LARGE</option>
-							<option>XXX LARGE</option>
-						</select>
-				</li>
-				<li>
-					소개: <textarea rows="2" cols="80" name="d_intro"></textarea>
-				</li>
-				<li>
-					본문사진1 : <input type="file" name="f_name1">
-				</li>
-				<li>
-					본문사진2 : <input type="file" name="f_name2">
-				</li>
-				<li>
-					본문사진3 : <input type="file" name="f_name3">
-				</li>
-				<li>
-					<input type="submit" value="완료" onclick="dogListWrite_ok(this.form)">
-				</li>
-			</ul>
+		    </div>
+		    </td>
+		  </tr>
+		  
+		  <tr>
+		 	<td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">모색</span>
+		      </div>
+				<select size="1" name="d_fur">
+						<option selected>브라운</option>
+						<option>블랙</option>
+						<option>화이트</option>
+						<option>블루멀</option>
+						<option>셰이블</option>
+						<option>골드</option>
+						<option>실버</option>
+						<option>그레이</option>
+						<option>기타</option>
+					</select>
+		    </div>
+		    </td>
+		  </tr>
+		  
+		  <tr>
+		 	 <td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">이름</span>
+		      </div>
+				<textarea class="form-control" rows="1" cols="150" name="d_name"></textarea>				
+		    </div>
+		 	 </td>	
+		  </tr>
+		  
+		  <tr>
+		 	 <td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">나이</span>
+		      </div>
+				<textarea class="form-control" rows="1" cols="150" name="d_age"></textarea>				
+		    </div>
+		 	 </td>	
+		  </tr>
+		  
+		  <tr>
+		 	<td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">크기</span>
+		      </div>
+				<select size="1" name="d_size">
+					<option selected>T-CUP</option>
+					<option>SMALL</option>
+					<option>MEDIUM</option>
+					<option>LARGE</option>
+					<option>XXX LARGE</option>
+				</select>
+		    </div>
+		    </td>
+		  </tr>
+		  
+		  <tr>
+		 	<td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <span class="input-group-text">내용</span>
+		      </div>
+				<textarea class="form-control" rows="15" cols="150" name="d_intro"></textarea>
+		    </div>
+		    </td>
+		  </tr>
+		  
+		  <tr>
+		 	 <td>
+		    <div class="input-group mb-3">
+		    	<div class="input-group mb-3">
+					<input type="file" name="f_name1">
+		    	</div>
+		    	<div class="input-group mb-3">
+					<input type="file" name="f_name2">
+		   		</div>
+		   		<div class="input-group mb-3">
+					<input type="file" name="f_name3">
+		    	</div>
+		 	 </td>	
+		  </tr>
+		  
+			
+		<tr>
+		 	 <td>
+		    <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		        <input type="submit" class="btn btn-outline-secondary" value="완료" onclick="dogListWrite_ok(this.form)">
+		      </div>
+		     </div>
+		 	 </td>
+		  </tr>
+		  		  
+		  <tr>
+		  	<td class="text-muted" colspan="2">
+				저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시글은 이용약관 및 관련법률에 의해 제재를 받으실 수 있습니다.
+			</td>				 
+		  </tr>
+		  </thead>
+		  </table>
+		
+
 		</form>
+	</div>
+	</div>
 	</div>
 	
 	<%@include file="include/footer.jsp"%>
